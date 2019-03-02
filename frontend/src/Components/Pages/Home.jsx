@@ -6,7 +6,10 @@ class Home extends Component {
     return (
       <main>
         <h1>Tienda</h1>
-        <Link to='/login'>Loguear</Link>
+        <Link to='/login'>Ingresar</Link>
+        <br/>
+        <br/>
+        <Link to='/signup'>Registrarse</Link>
       </main>
     )
   }
