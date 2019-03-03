@@ -1,3 +1,25 @@
-header {
-    background: red;
-} 
+/* unvisited link */
+a:link {
+    color: grey;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: grey;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: lightslategray;
+  }
+  
+  /* selected link */
+  a:active {
+    color: white;
+  }
+
+  .navbar .navbar-menu .navbar-start {
+    justify-content:center;
+    display: auto   ;
+    width: 100%;
+  }
