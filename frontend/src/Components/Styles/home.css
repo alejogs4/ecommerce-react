@@ -6,3 +6,11 @@
     background-size: 100% 100%;
     font-family: "Times New Roman", Times, serif;
 }
+
+.backColor {
+    background-color: #292929;
+}
+
+.column {
+    border: 2px;
+}
