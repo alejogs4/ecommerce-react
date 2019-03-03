@@ -7,8 +7,8 @@ class Home extends Component {
       <main>
         <h1>Tienda</h1>
         <Link to='/login'>LogIn</Link>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Link to='/signup'>SignUp</Link>
       </main>
     )

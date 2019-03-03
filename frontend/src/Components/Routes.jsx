@@ -6,12 +6,12 @@ import Admin from './Pages/Admin'
 import Signup from './Pages/Signup'
 
 const Routes = () => (
-    <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/admin' component={Admin} />
-        <Route exact path="/signup" component={Signup} />
-    </Switch>
+  <Switch>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/login' component={Login} />
+    <Route exact path='/admin' component={Admin} />
+    <Route exact path="/signup" component={Signup} />
+  </Switch>
 )
 
 export default Routes
