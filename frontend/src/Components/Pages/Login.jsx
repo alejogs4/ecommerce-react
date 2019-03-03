@@ -1,10 +1,10 @@
 import React, { Component, } from 'react'
 
 class Login extends Component {
-    handleSubmit(event){
+    handleSubmit(event) {
         alert("Logged in!")
-        this.setState({value: event.target.value})
-        
+        this.setState({ value: event.target.value })
+
         event.preventDefault()
     }
 
@@ -12,16 +12,27 @@ class Login extends Component {
         return (
             <main>
                 <h1>Login</h1>
+
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        <strong>Name: </strong><input type="text" name="name" />
-                        <br/>
-                        <br/>
-                        <strong>Password: </strong><input type="password" name="password" />
-                    </label>
-                    <br/>
-                    <br/>
-                    <input type="submit" value="Submit" />
+                    <div className="form-group">
+
+                        <label><strong>Name: </strong></label>
+                        <input 
+                        type="text" 
+                        name="name" 
+                        />
+                        </div>
+
+                        <div className="form-group">
+                        <label><strong>Password: </strong></label>
+                        <input 
+                        type="password" 
+                        name="password" />
+
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Log In" />
+                    </div>
                 </form>
             </main>
         )
