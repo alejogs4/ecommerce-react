@@ -5,33 +5,44 @@ import Nombre from '../../Images/NombreBLANCO.png';
 import Logo from '../../Images/LogoPNG.png';
 
 const Header = () => (
-  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src={Nombre} alt="Nombre" width="112" height="28" />
+  <nav className="navbar is-black" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
+      <a className="navbar-item" href="/">
+      <Link to='/'><img src={Nombre} alt="Nombre" width="112" height="28" /></Link>
+      </a>
+
+      <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="End">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-         <img src={Logo} alt='Logo' width="34" height="34"/>
+    <div className="navbar-menu">
+      <div className="navbar-start">
+        <a className="navbar-item">
+          <Link to='/'><img src={Logo} alt='Logo' width="28" height="28"/></Link>
         </a>
       </div>
-    </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-black">
+      
+    
+      <div id="End" className="navbar-end">
+        <div className="navbar-item">
+          <div className="buttons">
+            <a className="button is-black">
               <Link to='/signup'>SignUp</Link>
             </a>
-            <a class="button is-black">
+            <a className="button is-black">
               <Link to='/login'>LogIn</Link>
+            </a>
+            <a className="button is-black">
+              <Link to='/login'>ShoppingCart</Link>
             </a>
           </div>
         </div>
       </div>
+
+    </div>
   </nav>
 )
 export default Header
