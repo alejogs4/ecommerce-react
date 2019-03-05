@@ -10,7 +10,7 @@ export function add(item, list) {
         console.log("si lista")
         localStrg.push(finalItem)
         localStorage.setItem(list, JSON.stringify(localStrg))
-        
+
       } else {
         alert("This user already exists!")
         return false
@@ -42,4 +42,26 @@ export function userIsIn(item, list) {
     }
   }
   return false
+}
+
+export function verify(item, list) {
+  let lsList = JSON.parse(localStorage.getItem(list))
+  if (lsList != undefined) {
+    if (Array.isArray(lsList)) {
+      lsList.forEach(element => {
+        console.log(element.name)
+        console.log(item.name)
+        console.log(element.password)
+        console.log(item.password)
+        if (element.name === item.name && element.password === item.password){
+          return true
+        }
+      })
+      return false
+    } else {
+      return lsList.name === item.name && lsList.password === item.password
+    }
+  } else {
+    alert("This list doesn't exists!")
+  }
 }

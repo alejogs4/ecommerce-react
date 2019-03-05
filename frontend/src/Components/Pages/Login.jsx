@@ -1,4 +1,5 @@
 import React, { Component, } from 'react'
+import { verify } from '../../Helpers/handleLocalStorage'
 
 class Login extends Component {
   state = {
@@ -20,8 +21,16 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    alert("Logged in!")
-    this.setState({ value: e.target.value })
+
+    let user = {
+      name: this.state.userName,
+      password: this.state.userPassword
+    }
+
+    if(verify(user, 'users')){
+      alert("Logged in!")
+    }
+
   }
 
   render() {
@@ -33,7 +42,6 @@ class Login extends Component {
             <label><strong>Name: </strong></label>
             <input
               type="text"
-              name="name"
               value={this.state.userName}
               onChange={this.onChangeName}
               required
@@ -43,9 +51,9 @@ class Login extends Component {
             <label><strong>Password: </strong></label>
             <input
               type="password"
-              name="password" 
               value={this.state.userPassword}
               onChange={this.onChangePassword}
+              required
               />
           </div>
           <div className="form-group">
