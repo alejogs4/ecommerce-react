@@ -6,74 +6,85 @@ import Img1 from '../../Images/img1.png';
 import Img2 from '../../Images/img2.png';
 import Img3 from '../../Images/img3.png';
 import Img4 from '../../Images/img4.png';
+import Product from '../Atoms/Product';
 
 class Home extends Component {
+  state = {
+    img: '',
+    active: false
+  }
+
+  openModal = (img) => {
+    return e => {
+      this.setState({
+        img,
+        active: true
+      })
+    }
+  }
+
   render() {
+    const { img, active } = this.state
+
     return (
       <main>
         <section className="hero">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title">  
+              <h1 className="title">
                 <img src={Nombre} alt="Nombre" width="300" height="80" />
               </h1>
             </div>
           </div>
         </section>
 
-        <br/>
+        <br />
 
-        <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+        <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
           <ul>
-          <li class="is-active"><a href="#" aria-current="page">All</a></li>
+            <li className="is-active"><a href="#" aria-current="page">All</a></li>
             <li><a href="#">Drawings</a></li>
             <li><a href="#">Tattoos</a></li>
             <li><a href="#">Others</a></li>
           </ul>
         </nav>
 
-        <br/>
+        <br />
         <div className="backColor">
 
-          <div class="columns">
-            <div class="column">
-              <div class="columns is-mobile">
-                <div class="column">
-                  <figure class="image is-4by3">
-                    <img src={Img2} alt="img2"/>
-                  </figure>
+          <div className="columns">
+            <div className="column">
+              <div className="columns is-mobile">
+                <div className="column">
+                  <Product img={Img2} click={this.openModal(Img2)} />
                 </div>
-                <div class="column">
-                  <figure class="image is-4by3">
-                    <img src={Img3} alt="img3"/>
-                  </figure>
+                <div className="column">
+                  <Product img={Img3} click={this.openModal(Img3)} />
                 </div>
               </div>
             </div>
 
-            <div class="column">
-              <div class="columns is-mobile">
-                <div class="column">
-                  <figure class="image is-4by3">
-                    <img src={Img1} alt="img1"/>
-                  </figure>
+            <div className="column">
+              <div className="columns is-mobile">
+                <div className="column">
+                  <Product img={Img1} click={this.openModal(Img1)} />
                 </div>
-                <div class="column">
-                  <figure class="image is-4by3">
-                    <img src={Img4} alt="img4"/>
-                  </figure>
+                <div className="column">
+                  <Product img={Img4} click={this.openModal(Img4)} />
                 </div>
               </div>
             </div>
 
-            <div class="modal">
-              <div class="modal-background"></div>
-              <div class="modal-content">
-                <p class="image is-4by3">
-                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt=""/>
+            <div className={`modal ${active && 'is-active'}`}>
+              <div className="modal-background"></div>
+              <div className="modal-content">
+                <p className="image is-4by3">
+                  <img src={img} alt="" />
                 </p>
               </div>
-              <button class="modal-close is-large" aria-label="close"></button>
+              <button className="modal-close is-large"
+                aria-label="close"
+                onClick={() => this.setState({ active: false })}></button>
             </div>
 
           </div>
