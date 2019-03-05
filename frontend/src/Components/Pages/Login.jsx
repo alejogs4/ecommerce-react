@@ -1,5 +1,6 @@
 import React, { Component, } from 'react'
 import { verify } from '../../Helpers/handleLocalStorage'
+import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
   state = {
@@ -22,13 +23,22 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault()
 
-    let user = {
+    const user = {
       name: this.state.userName,
       password: this.state.userPassword
     }
 
-    if(verify(user, 'users')){
+    if (verify(user, 'users')) {
+      localStorage.setItem('currentUser', JSON.stringify(user))
+      localStorage.setItem('loggued', true)
       alert("Logged in!")
+      this.props.history.push("/")
+    }
+    if(user.name === 'admin' && user.password === 'admin'){
+      localStorage.setItem('currentUser', JSON.stringify(user))
+      localStorage.setItem('loggued', true)
+      alert("Logged in as ADMIN!")
+      this.props.history.push("/admin")
     }
 
   }
@@ -54,12 +64,12 @@ class Login extends Component {
               value={this.state.userPassword}
               onChange={this.onChangePassword}
               required
-              />
+            />
           </div>
           <div className="form-group">
-            <input 
-            type="submit" 
-            value="Log In" 
+            <input
+              type="submit"
+              value="Log In"
             />
           </div>
         </form>
@@ -68,4 +78,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login)
