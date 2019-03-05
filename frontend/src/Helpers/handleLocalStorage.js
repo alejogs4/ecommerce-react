@@ -8,37 +8,38 @@ export function add(item, list) {
       if (!userIsIn(item, lsList)) {
         let localStrg = lsList
         console.log("si lista")
-        //finalItem.id = localStrg.length
         localStrg.push(finalItem)
         localStorage.setItem(list, JSON.stringify(localStrg))
+        
       } else {
         alert("This user already exists!")
+        return false
       }
     } else {
       if (item.name !== lsList.name) {
         let localStrg = JSON.parse("[" + localStorage.getItem(list) + "]")
         console.log("no lista")
-        //finalItem.id = 1
         localStrg.push(finalItem)
         localStorage.setItem(list, JSON.stringify(localStrg))
       } else {
         alert("This user already exists!")
+        return false
       }
 
     }
   } else {
-    //finalItem.id = 0
     localStorage.setItem(list, JSON.stringify(finalItem))
     console.log("no undefined")
   }
+  return true
 }
 // TODO: Esto se pudo haber hecho usando Array.some ej list.some(listItem => listItem.name === item.name )
 // Te puedo explicar como funciona
 export function userIsIn(item, list) {
   for (let i = 0; i < list.length; i++) {
     if (list[i].name === item.name) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }

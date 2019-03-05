@@ -7,9 +7,7 @@ import Logo from '../../Images/LogoPNG.png';
 const Header = () => (
   <nav className="navbar is-black" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <a className="navbar-item" href="/">
-      <Link to='/'><img src={Nombre} alt="Nombre" width="112" height="28" /></Link>
-      </a>
+      <Link to='/' className="navbar-item"><img src={Nombre} alt="Nombre" width="112" height="28" /></Link>
 
       <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="End">
         <span aria-hidden="true"></span>
@@ -18,26 +16,26 @@ const Header = () => (
       </a>
     </div>
 
+
+
     <div className="navbar-menu">
       <div className="navbar-start">
-        <a className="navbar-item">
-          <Link to='/'><img src={Logo} alt='Logo' width="28" height="28"/></Link>
-        </a>
+        <Link to='/' className="navbar-item"><img src={Logo} alt='Logo' width="28" height="28" /></Link>
       </div>
-      
-    
+
+
       <div id="End" className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <a className="button is-black">
-              <Link to='/signup'>SignUp</Link>
-            </a>
-            <a className="button is-black">
-              <Link to='/login'>LogIn</Link>
-            </a>
-            <a className="button is-black">
-              <Link to='/login'>ShoppingCart</Link>
-            </a>
+            <Link to='/signup' className="button is-black">Sign Up</Link>
+            <Link to='/login' className="button is-black">Log In</Link>
+            <Link to='/' className="button is-black">Shopping Cart</Link>
+          </div>
+        </div>
+        <div className="navbar-item">
+          <div className="buttons">
+          <button className="button is-black">Usuario</button>
+          <button className="button is-black">Log Out</button>
           </div>
         </div>
       </div>

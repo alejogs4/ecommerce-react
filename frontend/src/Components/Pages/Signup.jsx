@@ -9,52 +9,54 @@ class Signup extends Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeName = this.onChangeName.bind(this)
         this.onChangePassword = this.onChangePassword.bind(this)
+        this.onChangeRePassword = this.onChangeRePassword.bind(this)
 
         this.state = {
-            user_name: '',
-            user_password: '',
-            re_password: ''
+            userName: '',
+            userPassword: '',
+            rePassword: ''
         }
     }
 
     onChangeName(e) {
         this.setState({
-            user_name: e.target.value
+            userName: e.target.value
         })
     }
 
     onChangePassword(e) {
         this.setState({
-            user_password: e.target.value
+            userPassword: e.target.value
         })
     }
 
     onChangeRePassword(e) {
         this.setState({
-            re_password: e.target.value
+            rePassword: e.target.value
         })
     }
 
     onSubmit(e) {
-        if (this.state.password === this.state.re_password) {
-            e.preventDefault()
+        e.preventDefault()
+        if (this.state.userPassword === this.state.rePassword) {
+
             let user = {
-                name: this.state.user_name,
-                password: this.state.user_password
+                name: this.state.userName,
+                password: this.state.userPassword
             }
-            alert(`Signed Up! name: ${this.state.user_name}, password: ${this.state.user_password}, ${localStorage.getItem('users')}`)
-            add(user, 'users')
-            this.props.history.push("/login")
-
-
-            this.setState({
-                user_name: '',
-                user_password: '',
-                re_password: ''
-            })
+            if (add(user, 'users')) {
+                alert("Signed Up!")
+                this.props.history.push("/login")
+                this.setState({
+                    userName: '',
+                    userPassword: '',
+                    rePassword: ''
+                })
+            }
         } else {
             alert("Passwords must match!")
         }
+
     }
 
     render() {
@@ -67,7 +69,7 @@ class Signup extends Component {
                         <input
                             type="text"
                             className="form-control"
-                            value={this.state.user_name}
+                            value={this.state.userName}
                             onChange={this.onChangeName}
                             required
                         />
@@ -77,7 +79,7 @@ class Signup extends Component {
                         <input
                             type="password"
                             className="form-control"
-                            value={this.state.user_password}
+                            value={this.state.userPassword}
                             onChange={this.onChangePassword}
                             required
                         />
@@ -87,6 +89,8 @@ class Signup extends Component {
                         <input
                             type="password"
                             className="form-control"
+                            value={this.state.rePassword}
+                            onChange={this.onChangeRePassword}
                             required
                         />
                     </div>
@@ -95,7 +99,6 @@ class Signup extends Component {
                             type="submit"
                             value="Sign Up"
                             className="btn btn-primary"
-                            required
                         />
                     </div>
                 </form>
