@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import '../Styles/home.css'
 
 import Nombre from '../../Images/NombreBLANCO.png';
-import Img1 from '../../Images/img1.png';
-import Img2 from '../../Images/img2.png';
-import Img3 from '../../Images/img3.png';
-import Img4 from '../../Images/img4.png';
 import Product from '../Atoms/Product';
 import ProductsGrid from '../Molecules/ProductsGrid';
 
@@ -30,6 +26,7 @@ class Home extends Component {
 
     return (
       <main>
+        <br/>
         <section className="hero">
           <div className="hero-body">
             <div className="container has-text-centered">

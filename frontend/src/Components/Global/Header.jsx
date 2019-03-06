@@ -11,7 +11,7 @@ const logOut = () => {
 }
 
 const Header = () => (
-  <nav className="navbar is-black" role="navigation" aria-label="main navigation">
+  <nav className="navbar is-black is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <Link to='/' className="navbar-item">
         <img src={Nombre} alt="Nombre" width="112" height="28" />

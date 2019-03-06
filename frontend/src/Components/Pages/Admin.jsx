@@ -14,7 +14,9 @@ class Admin extends Component {
                 <h3 className="title has-text-white">Admin</h3>
                 <p className="subtitle has-text-grey">Choose an action</p>
                 <div className="box">
-                  <Link className="button is-block is-success is-large is-fullwidth" to='/admin/products'>Add products</Link>
+                  <Link className="button is-block is-warning is-large is-fullwidth" to='/admin/products'>Admin products</Link>
+                  <br/>
+                  <Link className="button is-block is-danger is-large is-fullwidth" to='/admin/users'>Admin users</Link>
                 </div>
               </div>
             </div>
