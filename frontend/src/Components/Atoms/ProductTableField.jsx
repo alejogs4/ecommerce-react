@@ -2,14 +2,26 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const ProductTableField = ({ item, handleDelete }) => (
-  <tr>
-    <td>{item.name}</td>
-    <td>{item.type}</td>
-    <td>{item.IMG}</td>
-    <td>{item.price}</td>
-    <td><Link to={`/admin/edit/${item.name}`}>Edit</Link></td>
-    <td><button onClick={handleDelete}>Delete</button></td>
-  </tr>
+  <div className="columns is-desktop has-text-black">
+    <div className="column">
+      {item.name}
+    </div>
+    <div className="column">
+      {item.type}
+    </div>
+    <div className="column">
+      {item.IMG}
+    </div>
+    <div className="column">
+      {item.price}
+    </div>
+    <div className="column">
+      <Link to={`/admin/edit/${item.name}`}>Edit</Link>
+    </div>
+    <div className="column">
+      <button onClick={handleDelete}>Delete</button>
+    </div>
+  </div>
 )
 
 

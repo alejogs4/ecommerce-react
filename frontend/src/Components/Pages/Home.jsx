@@ -52,7 +52,7 @@ class Home extends Component {
         <br />
         <div className="backColor">
 
-          <div className="columns">
+          <div className="columns is-desktop">
 
             <div className="column">
               <Product img={Img3} click={this.openModal(Img3)} />
