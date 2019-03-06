@@ -64,8 +64,8 @@ class Home extends Component {
           </div>
         </div>
 
-        <footer class="footer">
-          <div class="content has-text-centered">
+        <footer className="footer">
+          <div className="content has-text-centered">
             <p>
               VANTABLACK by <a href="https://github.com/alejogs4">Alejandro Garcia</a>, 
               <a href="https://github.com/maugarbru"> Mauricio Garzon</a> and  

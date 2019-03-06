@@ -23,7 +23,7 @@ class AdminUsers extends Component {
     return () => {
       deleteItem(name, 'users')
       this.setState({
-        products: localStorage.users ? JSON.parse(localStorage.users) : []
+        users: localStorage.users ? JSON.parse(localStorage.users) : []
       })
     }
   }
