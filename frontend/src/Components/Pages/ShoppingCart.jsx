@@ -41,27 +41,36 @@ class ShoppingCart extends Component {
 
     return (
       <main>
-        <h1>Shopping Cart</h1>
-        <div className="container">
-          <div className="notification">
-            {shopping.map((item, key) => (
-              <ProductTableFieldCart key={key}
-                item={item}
-                handleDelete={this.handleDelete(item)} />
-            ))}
+        <br/>
+        <section className="hero is-black is-fullheight">
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <h3 className="title has-text-white">Shopping Cart</h3>
+                <div className="container">
+                  <div className="notification">
+                    {shopping.map((item, key) => (
+                      <ProductTableFieldCart key={key}
+                        item={item}
+                        handleDelete={this.handleDelete(item)} />
+                    ))}
+                  </div>
+                </div>
+                <br/>
+                <h2 className="title has-text-grey">Total price: {totalPrice}</h2  >
+                <br/>
+                <h3 className="title has-text-white">Products List</h3>               
+                <div className="container">
+                  <div className="notification">
+                    {products.map((item, key) => (
+                      <ProductTableFieldShopping key={key}
+                        item={item}
+                        handleAdd={this.handleAdd(item)} />
+                    ))}
+                  </div>
+                </div>
+            </div>
           </div>
-        </div>
-        <h2>Total price: {totalPrice}</h2>
-        <hr />
-        <div className="container">
-          <div className="notification">
-            {products.map((item, key) => (
-              <ProductTableFieldShopping key={key}
-                item={item}
-                handleAdd={this.handleAdd(item)} />
-            ))}
-          </div>
-        </div>
+        </section>
       </main>
     )
   }

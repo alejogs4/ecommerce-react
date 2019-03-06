@@ -15,8 +15,7 @@ const ProductTableFieldShopping = ({ item, handleAdd}) => (
       {item.price}
     </div>
     <div className="column">
-    <button className="button is-warning is-fullwidth" onClick={handleAdd}>Add to cart</button>
-
+    <button className="button is-success is-fullwidth" onClick={handleAdd}>Add to cart</button>
     </div>
   </div>
 )

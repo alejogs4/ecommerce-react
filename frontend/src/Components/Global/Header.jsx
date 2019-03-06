@@ -42,7 +42,7 @@ const Header = () => (
                 localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin'
                   ? '/admin' : '/edit/' + JSON.parse(localStorage.currentUser).name
               } className="button is-black">
-                {localStorage.currentUser ? JSON.parse(localStorage.currentUser).name : 'Usuario'
+                {localStorage.currentUser ? (JSON.parse(localStorage.currentUser).name).toUpperCase() : 'Usuario'
               }
               </Link>
               <Link to="/" className="navbar-item button is-black" onClick={logOut}>Log Out</Link>
