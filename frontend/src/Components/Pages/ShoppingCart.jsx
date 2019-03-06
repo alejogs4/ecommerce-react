@@ -9,7 +9,13 @@ class ShoppingCart extends Component {
 	state = {
 		products: localStorage.products ? JSON.parse(localStorage.products) : [],
 		shopping: localStorage.shopping ? JSON.parse(localStorage.shopping) : [],
-		totalPrice: 0
+		//MIRA ESTA BELLEZA REY
+		totalPrice:
+			localStorage.shopping
+				?
+				(JSON.parse(localStorage.shopping).map(i => parseInt(i.price))).reduce((a, b) => a + b, 0)
+				:
+				0
 	}
 
 	handleAdd = (item) => {
