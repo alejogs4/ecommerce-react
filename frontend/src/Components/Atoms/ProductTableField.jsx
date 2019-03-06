@@ -19,7 +19,7 @@ const ProductTableField = ({ item, handleDelete }) => (
       <Link to={`/admin/edit/${item.name}`}>Edit</Link>
     </div>
     <div className="column">
-      <button onClick={handleDelete}>Delete</button>
+      <button className="button is-warning is-fullwidth" onClick={handleDelete}>Delete</button>
     </div>
   </div>
 )

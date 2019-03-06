@@ -10,7 +10,6 @@ const logOut = () => {
   localStorage.setItem('currentUser', "")
 }
 
-
 const Header = () => (
   <nav className="navbar is-black" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">

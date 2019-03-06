@@ -6,14 +6,36 @@ class Admin extends Component {
   render() {
     if (!(localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin')) {
       return (
-        <h1>Acceso denegado</h1>
+        <main>
+        <section className="hero is-black is-fullheight">
+            <div className="hero-body">
+                <div className="container has-text-centered">
+                    <div className="column is-4 is-offset-4">
+                        <h3 className="title has-text-red">Access Denied!</h3>
+                        <p className="subtitle has-text-grey">You have no admin permissions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
       )
     }
 
     return  (
       <main>
-        <h1>Admin</h1>
-        <Link to='/admin/products'>Add products</Link>
+      <section className="hero is-black is-fullheight">
+          <div className="hero-body">
+              <div className="container has-text-centered">
+                  <div className="column is-4 is-offset-4">
+                      <h3 className="title has-text-white">Admin</h3>
+                      <p className="subtitle has-text-grey">Choose an action</p>
+                      <div className="box">
+                        <Link className="button is-block is-success is-large is-fullwidth" to='/admin/products'>Add products</Link>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
       </main>
     )
   }

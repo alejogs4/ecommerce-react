@@ -43,39 +43,48 @@ function EditProduct({ match, history }) {
 
   return (
     <main>
-      <h1>Products Manager</h1>
-      <form onSubmit={edit}>
-        <div className="form-group">
-          <label><strong>Enter product name: </strong></label>
-          <input type="text"
-            className="form-control"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            required />
+    <section className="hero is-black is-fullheight">
+        <div className="hero-body">
+            <div className="container has-text-centered">
+                <div className="column is-4 is-offset-4">
+                    <h3 className="title has-text-white">Edit</h3>
+                    <p className="subtitle has-text-grey">Edit products as you like</p>
+                    <div className="box">
+                        <form onSubmit={edit}> 
+                            <div className="field">
+                                <div className="control">
+                                    <input className="input is-large is-danger" type="text" placeholder="Name" autoFocus=""
+                                    value={name}
+                                    onChange={e => setName(e.target.value)}
+                                    required />
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <div className="control">
+                                    <input className="input is-large is-danger" type="url" placeholder="Img URL"
+                                    value={img}
+                                    onChange={e => setImg(e.target.img)}
+                                    required />
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <div className="control">
+                                    <input className="input is-large is-danger" type="number" placeholder="Price"
+                                    value={price}
+                                    onChange={e => setPrice(e.target.value)}
+                                    required />
+                                </div>
+                            </div>
+                            <input className="button is-block is-danger is-large is-fullwidth" type="submit" value="Edit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="form-group">
-          <label><strong>Enter product URL: </strong></label>
-          <input type="url"
-            className="form-control"
-            value={img}
-            onChange={e => setImg(e.target.img)}
-            required />
-        </div>
-        <div className="form-group">
-          <label><strong>Enter product price: </strong></label>
-          <input type="number"
-            className="form-control"
-            value={price}
-            onChange={e => setPrice(e.target.value)}
-            required />
-        </div>
-        <div className="form-group">
-          <input type="submit"
-            value="Edit product"
-            className="btn btn-primary" />
-        </div>
-      </form>
-    </main >
+    </section>
+    </main>
   )
 }
 
