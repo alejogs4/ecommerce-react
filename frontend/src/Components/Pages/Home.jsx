@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../Styles/home.css'
 
-import Nombre from '../../Images/NombreNEGRO.png';
+import Nombre from '../../Images/NombreBLANCO.png';
 import Img1 from '../../Images/img1.png';
 import Img2 from '../../Images/img2.png';
 import Img3 from '../../Images/img3.png';
@@ -30,7 +30,7 @@ class Home extends Component {
       <main>
         <section className="hero">
           <div className="hero-body">
-            <div className="container">
+            <div className="container has-text-centered">
               <h1 className="title">
                 <img src={Nombre} alt="Nombre" width="300" height="80" />
               </h1>

@@ -1,10 +1,11 @@
 .hero .hero-body {
-    background-image: url('../../Images/fondo.png');
+    background-image: url('../../Images/fondo.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: initial;
     background-size: 100% 100%;
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-content: center;
 }
 
 .backColor {

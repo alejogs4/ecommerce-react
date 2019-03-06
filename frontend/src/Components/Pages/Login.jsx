@@ -37,33 +37,44 @@ class Login extends Component {
       this.props.history.push("/admin")
       return
     }
-    alert('User does´n exists')
+    alert('Login Error')
   }
 
   render() {
     return (
       <main>
-        <h1>Login</h1>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label><strong>Name: </strong></label>
-            <input type="text"
-              value={this.state.userName}
-              onChange={this.handleChange('userName')}
-              required />
-          </div>
-          <div className="form-group">
-            <label><strong>Password: </strong></label>
-            <input type="password"
-              value={this.state.userPassword}
-              onChange={this.handleChange('userPassword')}
-              required />
-          </div>
-          <div className="form-group">
-            <input type="submit"
-              value="Log In" />
-          </div>
-        </form>
+        <section className="hero is-black is-fullheight">
+            <div className="hero-body">
+                <div className="container has-text-centered">
+                    <div className="column is-4 is-offset-4">
+                        <h3 className="title has-text-white">Login</h3>
+                        <p className="subtitle has-text-grey">Please login to proceed.</p>
+                        <div className="box">
+                            <form onSubmit={this.onSubmit}> 
+                                <div className="field">
+                                    <div className="control">
+                                        <input className="input is-info is-large" type="text" placeholder="Your Name" autoFocus=""
+                                        value={this.state.userName}
+                                        onChange={this.handleChange('userName')}
+                                        required />
+                                    </div>
+                                </div>
+
+                                <div className="field">
+                                    <div className="control">
+                                        <input className="input is-info is-large" type="password" placeholder="Your Password"
+                                        value={this.state.userPassword}
+                                        onChange={this.handleChange('userPassword')}
+                                        required />
+                                    </div>
+                                </div>
+                                <input className="button is-block is-info is-large is-fullwidth" type="submit" value="Log In" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
       </main>
     )
   }

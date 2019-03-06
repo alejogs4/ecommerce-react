@@ -37,48 +37,49 @@ class Signup extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: 10 }}>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label><strong>Enter name: </strong></label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.userName}
-              onChange={this.handleChange('userName')}
-              required
-            />
+      <main>
+      <section className="hero is-black is-fullheight">
+          <div className="hero-body">
+              <div className="container has-text-centered">
+                  <div className="column is-4 is-offset-4">
+                      <h3 className="title has-text-white">Sign Up</h3>
+                      <p className="subtitle has-text-grey">Please register to proceed.</p>
+                      <div className="box">
+                          <form onSubmit={this.onSubmit}> 
+                              <div className="field">
+                                  <div className="control">
+                                      <input className="input is-large is-primary" type="text" placeholder="Your Name" autoFocus=""
+                                      value={this.state.userName}
+                                      onChange={this.handleChange('userName')}
+                                      required />
+                                  </div>
+                              </div>
+
+                              <div className="field">
+                                  <div className="control">
+                                      <input className="input is-large is-primary" type="password" placeholder="Your Password"
+                                      value={this.state.userPassword}
+                                      onChange={this.handleChange('userPassword')}
+                                      required />
+                                  </div>
+                              </div>
+
+                              <div className="field">
+                                  <div className="control">
+                                      <input className="input is-large is-primary" type="password" placeholder="Re-enter Password"
+                                      value={this.state.rePassword}
+                                      onChange={this.handleChange('rePassword')}
+                                      required />
+                                  </div>
+                              </div>
+                              <input className="button is-block is-primary is-large is-fullwidth" type="submit" value="Sign Up" />
+                          </form>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div className="form-group">
-            <label><strong>Enter password: </strong></label>
-            <input
-              type="password"
-              className="form-control"
-              value={this.state.userPassword}
-              onChange={this.handleChange('userPassword')}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label><strong>Re-enter password: </strong></label>
-            <input
-              type="password"
-              className="form-control"
-              value={this.state.rePassword}
-              onChange={this.handleChange('rePassword')}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Sign Up"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
-      </div>
+      </section>
+      </main>
     )
   }
 }
