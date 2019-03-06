@@ -1,83 +1,69 @@
-import React, { Component, } from 'react'
+import React, { useState } from 'react'
 import { verifyUser } from '../../Helpers/handleLocalStorage'
 import { withRouter } from 'react-router-dom'
-// import useNotification from '../CustomHooks/useNotification';
+import useNotification from '../CustomHooks/useNotification';
 
-class Login extends Component {
-  state = {
-    userName: '',
-    userPassword: ''
-  }
+function Login({ history }) {
+  const [userName, setUserName] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+  const { Notification, updateNotification } = useNotification({ text: '', active: false, type: '' })
 
-  handleChange = (field) => {
-    return e => {
-      this.setState({
-        [field]: e.target.value
-      })
-    }
-  }
-
-  onSubmit = (e) => {
+  function onSubmit(e) {
     e.preventDefault()
 
-    const user = {
-      name: this.state.userName,
-      password: this.state.userPassword
-    }
+    const user = { name: userName, password: userPassword }
 
     if (verifyUser(user, 'users')) {
       localStorage.setItem('currentUser', JSON.stringify(user))
       localStorage.setItem('loggued', true)
-      this.props.history.push("/")
+      history.push("/")
       return
     }
     if (user.name === 'admin' && user.password === 'admin') {
       localStorage.setItem('currentUser', JSON.stringify(user))
       localStorage.setItem('loggued', true)
-      this.props.history.push("/admin")
+      history.push("/admin")
       return
     }
-    alert('Login Error')
+    updateNotification(true, 'is-danger', `This user doesn't exist`)
   }
 
-  render() {
-    return (
-      <main>
-        <section className="hero is-black is-fullheight">
-            <div className="hero-body">
-                <div className="container has-text-centered">
-                    <div className="column is-4 is-offset-4">
-                        <h3 className="title has-text-white">Login</h3>
-                        <p className="subtitle has-text-grey">Please login to proceed.</p>
-                        <div className="box">
-                            <form onSubmit={this.onSubmit}> 
-                                <div className="field">
-                                    <div className="control">
-                                        <input className="input is-info is-large" type="text" placeholder="Your Name" autoFocus=""
-                                        value={this.state.userName}
-                                        onChange={this.handleChange('userName')}
-                                        required />
-                                    </div>
-                                </div>
-
-                                <div className="field">
-                                    <div className="control">
-                                        <input className="input is-info is-large" type="password" placeholder="Your Password"
-                                        value={this.state.userPassword}
-                                        onChange={this.handleChange('userPassword')}
-                                        required />
-                                    </div>
-                                </div>
-                                <input className="button is-block is-info is-large is-fullwidth" type="submit" value="Log In" />
-                            </form>
-                        </div>
+  return (
+    <main>
+      <section className="hero is-black is-fullheight">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="column is-4 is-offset-4">
+              <h3 className="title has-text-white">Login</h3>
+              <p className="subtitle has-text-grey">Please login to proceed.</p>
+              <div className="box">
+                <form onSubmit={onSubmit} style={{ marginBottom: '1em' }}>
+                  <div className="field">
+                    <div className="control">
+                      <input className="input is-info is-large" type="text" placeholder="Your Name" autoFocus=""
+                        value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                        required />
                     </div>
-                </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <input className="input is-info is-large" type="password" placeholder="Your Password"
+                        value={userPassword}
+                        onChange={e => setUserPassword(e.target.value)}
+                        required />
+                    </div>
+                  </div>
+                  <input className="button is-block is-info is-large is-fullwidth" type="submit" value="Log In" />
+                </form>
+                {Notification}
+              </div>
             </div>
-        </section>
-      </main>
-    )
-  }
+          </div>
+        </div>
+      </section>
+    </main>
+  )
 }
 
 export default withRouter(Login)

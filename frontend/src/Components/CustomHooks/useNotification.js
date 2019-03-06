@@ -11,12 +11,12 @@ function useNotification(settings) {
     setActive(active)
   }
 
-  const Notification = active ? (
+  const Notification = active && (
     <div class={`notification ${type}`}>
       <button class="delete" onClick={() => setActive(false)}></button>
       {text}
     </div>
-  ) : null
+  )
 
   return { Notification, updateNotification }
 }

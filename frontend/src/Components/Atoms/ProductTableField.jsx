@@ -16,10 +16,10 @@ const ProductTableField = ({ item, handleDelete }) => (
       {item.price}
     </div>
     <div className="column">
-      <Link to={`/admin/edit/${item.name}`}>Edit</Link>
+      <Link to={`/admin/edit/${item.name}`} className='button is-warning is-fullwidth'>Edit</Link>
     </div>
     <div className="column">
-      <button className="button is-warning is-fullwidth" onClick={handleDelete}>Delete</button>
+      <button className="button is-danger is-fullwidth" onClick={handleDelete}>Delete</button>
     </div>
   </div>
 )

@@ -15,8 +15,7 @@ const ProductTableFieldCart = ({ item, handleDelete }) => (
       {item.price}
     </div>
     <div className="column">
-    <button className="button is-warning is-fullwidth" onClick={handleDelete}>Remove</button>
-
+      <button className="button is-warning is-fullwidth" onClick={handleDelete}>Remove</button>
     </div>
   </div>
 )

@@ -1,28 +1,17 @@
 
-export function addItem(item, list) {
+export function addItem(item, list, verifyExists = true) {
   if (!localStorage[list]) {
     localStorage.setItem(list, JSON.stringify([item]))
     return true
   }
+
   const lsList = JSON.parse(localStorage.getItem(list))
   
-  if (itemIsIn(item, lsList)) {
+  if (itemIsIn(item, lsList) && verifyExists) {
     alert("This item already exists!")
     return false
   }
 
-  lsList.push(item)
-  localStorage.setItem(list, JSON.stringify(lsList))
-  return true
-}
-
-export function addToCart(item, list){
-  if (!localStorage[list]) {
-    localStorage.setItem(list, JSON.stringify([item]))
-    return true
-  }
-  const lsList = JSON.parse(localStorage.getItem(list))
-  
   lsList.push(item)
   localStorage.setItem(list, JSON.stringify(lsList))
   return true
