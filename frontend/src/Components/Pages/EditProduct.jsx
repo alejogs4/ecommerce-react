@@ -36,6 +36,7 @@ function EditProduct({ match, history }) {
       
     if (index !== -1) {
       const products = JSON.parse(localStorage.products)
+      console.log(products[index], newProduct)
       products[index] = newProduct
       localStorage.setItem('products', JSON.stringify(products))
       history.push('/admin/products')
@@ -65,7 +66,7 @@ function EditProduct({ match, history }) {
                     <div className="control">
                       <input className="input is-large is-danger" type="url" placeholder="Img URL"
                         value={img}
-                        onChange={e => setImg(e.target.img)}
+                        onChange={e => setImg(e.target.value)}
                         required />
                     </div>
                   </div>

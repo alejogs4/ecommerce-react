@@ -7,11 +7,13 @@ import Img2 from '../../Images/img2.png';
 import Img3 from '../../Images/img3.png';
 import Img4 from '../../Images/img4.png';
 import Product from '../Atoms/Product';
+import ProductsGrid from '../Molecules/ProductsGrid';
 
 class Home extends Component {
   state = {
     img: '',
-    active: false
+    active: false,
+    products: localStorage.products ? JSON.parse(localStorage.products) : []
   }
 
   openModal = (img) => {
@@ -24,7 +26,7 @@ class Home extends Component {
   }
 
   render() {
-    const { img, active } = this.state
+    const { img, active, products } = this.state
 
     return (
       <main>
@@ -51,34 +53,17 @@ class Home extends Component {
 
         <br />
         <div className="backColor">
-
-          <div className="columns is-desktop">
-
-            <div className="column">
-              <Product img={Img3} click={this.openModal(Img3)} />
+          <ProductsGrid products={products} click={this.openModal} />
+          <div className={`modal ${active && 'is-active'}`}>
+            <div className="modal-background"></div>
+            <div className="modal-content">
+              <p className="image is-4by3">
+                <img src={img} alt="" />
+              </p>
             </div>
-            <div className="column">
-              <Product img={Img1} click={this.openModal(Img1)} />
-            </div>
-            <div className="column">
-              <Product img={Img4} click={this.openModal(Img4)} />
-            </div>
-            <div className="column">
-              <Product img={Img2} click={this.openModal(Img2)} />
-            </div>
-
-            <div className={`modal ${active && 'is-active'}`}>
-              <div className="modal-background"></div>
-              <div className="modal-content">
-                <p className="image is-4by3">
-                  <img src={img} alt="" />
-                </p>
-              </div>
-              <button className="modal-close is-large"
-                aria-label="close"
-                onClick={() => this.setState({ active: false })}></button>
-            </div>
-
+            <button className="modal-close is-large"
+              aria-label="close"
+              onClick={() => this.setState({ active: false })}></button>
           </div>
         </div>
       </main>
