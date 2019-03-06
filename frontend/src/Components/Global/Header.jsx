@@ -14,8 +14,9 @@ const logOut = () => {
 const Header = () => (
   <nav className="navbar is-black" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <Link to='/' className="navbar-item"><img src={Nombre} alt="Nombre" width="112" height="28" /></Link>
-
+      <Link to='/' className="navbar-item">
+        <img src={Nombre} alt="Nombre" width="112" height="28" />
+      </Link>
       <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="End">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -40,16 +41,15 @@ const Header = () => (
             <div className="buttons">
               <Link to={
                 localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin'
-                 ? '/admin' : '/'
-              } className="button is-black">{localStorage.currentUser ? JSON.parse(localStorage.currentUser).name : 'Usuario'}</Link>
-              <button 
-              className="button is-black"
-              >
-                
+                  ? '/admin' : '/'
+              } className="button is-black">
+                {localStorage.currentUser ? JSON.parse(localStorage.currentUser).name : 'Usuario'}
+              </Link>
+              <button className="button is-black">
               </button>
-              <Link to="/" className="button is-black" onClick={logOut}>Log Out</Link>
+              <Link to="/" className="navbar-item button is-black" onClick={logOut}>Log Out</Link>
 
-              <Link to='/' className="button is-black">Shopping Cart</Link>
+              {/* <Link to='/' className="navbar-item button is-black">Shopping Cart</Link> */}
             </div>
           </div>
         }

@@ -5,6 +5,7 @@ import Login from './Pages/Login'
 import Admin from './Pages/Admin'
 import Signup from './Pages/Signup'
 import AdminProducts from './Pages/AdminProducts'
+import EditProduct from './Pages/EditProduct';
 
 const Routes = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Routes = () => (
     <Route exact path='/login' component={Login} />
     <Route exact path='/admin' component={Admin} />
     <Route exact path='/admin/products' component={AdminProducts} />
+    <Route exact path='/admin/edit/:name' component={EditProduct} />
     <Route exact path="/signup" component={Signup} />
   </Switch>
 )

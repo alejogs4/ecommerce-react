@@ -1,6 +1,7 @@
 import React, { Component, } from 'react'
 import { verifyUser } from '../../Helpers/handleLocalStorage'
 import { withRouter } from 'react-router-dom'
+// import useNotification from '../CustomHooks/useNotification';
 
 class Login extends Component {
   state = {
@@ -8,16 +9,12 @@ class Login extends Component {
     userPassword: ''
   }
 
-  onChangeName = (e) => {
-    this.setState({
-      userName: e.target.value
-    })
-  }
-
-  onChangePassword = (e) => {
-    this.setState({
-      userPassword: e.target.value
-    })
+  handleChange = (field) => {
+    return e => {
+      this.setState({
+        [field]: e.target.value
+      })
+    }
   }
 
   onSubmit = (e) => {
@@ -31,16 +28,16 @@ class Login extends Component {
     if (verifyUser(user, 'users')) {
       localStorage.setItem('currentUser', JSON.stringify(user))
       localStorage.setItem('loggued', true)
-      alert("Logged in!")
       this.props.history.push("/")
+      return
     }
-    if(user.name === 'admin' && user.password === 'admin'){
+    if (user.name === 'admin' && user.password === 'admin') {
       localStorage.setItem('currentUser', JSON.stringify(user))
       localStorage.setItem('loggued', true)
-      alert("Logged in as ADMIN!")
       this.props.history.push("/admin")
+      return
     }
-
+    alert('User does´n exists')
   }
 
   render() {
@@ -50,27 +47,21 @@ class Login extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label><strong>Name: </strong></label>
-            <input
-              type="text"
+            <input type="text"
               value={this.state.userName}
-              onChange={this.onChangeName}
-              required
-            />
+              onChange={this.handleChange('userName')}
+              required />
           </div>
           <div className="form-group">
             <label><strong>Password: </strong></label>
-            <input
-              type="password"
+            <input type="password"
               value={this.state.userPassword}
-              onChange={this.onChangePassword}
-              required
-            />
+              onChange={this.handleChange('userPassword')}
+              required />
           </div>
           <div className="form-group">
-            <input
-              type="submit"
-              value="Log In"
-            />
+            <input type="submit"
+              value="Log In" />
           </div>
         </form>
       </main>
