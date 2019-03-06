@@ -48,7 +48,7 @@ const Header = () => (
               </button>
               <Link to="/" className="navbar-item button is-black" onClick={logOut}>Log Out</Link>
 
-              {/* <Link to='/' className="navbar-item button is-black">Shopping Cart</Link> */}
+              <Link to='/shopping' className="navbar-item button is-black">Shopping Cart</Link>
             </div>
           </div>
         }

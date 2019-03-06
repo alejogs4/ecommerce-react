@@ -16,6 +16,18 @@ export function addItem(item, list) {
   return true
 }
 
+export function addToCart(item, list){
+  if (!localStorage[list]) {
+    localStorage.setItem(list, JSON.stringify([item]))
+    return true
+  }
+  const lsList = JSON.parse(localStorage.getItem(list))
+  
+  lsList.push(item)
+  localStorage.setItem(list, JSON.stringify(lsList))
+  return true
+}
+
 export function deleteItem(item, list){
   if (localStorage[list]){
     const lsList = JSON.parse(localStorage.getItem(list))

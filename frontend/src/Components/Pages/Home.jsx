@@ -51,7 +51,7 @@ class Home extends Component {
 
         <br />
         <div className="backColor">
-
+          
           <div className="columns is-desktop">
 
             <div className="column">
