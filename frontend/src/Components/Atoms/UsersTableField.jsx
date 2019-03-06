@@ -11,5 +11,4 @@ const UsersTableField = ({ item, handleDelete }) => (
   </div>
 )
 
-
 export default UsersTableField
