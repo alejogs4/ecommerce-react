@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { addItem, deleteItem } from "../../Helpers/handleLocalStorage"
 import { withRouter } from 'react-router-dom'
 import ProductTableField from '../Atoms/ProductTableField';
+import withAdminPermission from '../HOC/withAdminPermission'
 
 class AdminProducts extends Component {
 
@@ -128,4 +129,4 @@ class AdminProducts extends Component {
   }
 }
 
-export default withRouter(AdminProducts)
+export default withAdminPermission(withRouter(AdminProducts))

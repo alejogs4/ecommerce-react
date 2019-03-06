@@ -1,44 +1,28 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import withAdminPermission from '../HOC/withAdminPermission'
 
 class Admin extends Component {
 
   render() {
-    if (!(localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin')) {
-      return (
-        <main>
-        <section className="hero is-black is-fullheight">
-            <div className="hero-body">
-                <div className="container has-text-centered">
-                    <div className="column is-4 is-offset-4">
-                        <h3 className="title has-text-red">Access Denied!</h3>
-                        <p className="subtitle has-text-grey">You have no admin permissions</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        </main>
-      )
-    }
-
-    return  (
+    return (
       <main>
-      <section className="hero is-black is-fullheight">
+        <section className="hero is-black is-fullheight">
           <div className="hero-body">
-              <div className="container has-text-centered">
-                  <div className="column is-4 is-offset-4">
-                      <h3 className="title has-text-white">Admin</h3>
-                      <p className="subtitle has-text-grey">Choose an action</p>
-                      <div className="box">
-                        <Link className="button is-block is-success is-large is-fullwidth" to='/admin/products'>Add products</Link>
-                      </div>
-                  </div>
+            <div className="container has-text-centered">
+              <div className="column is-4 is-offset-4">
+                <h3 className="title has-text-white">Admin</h3>
+                <p className="subtitle has-text-grey">Choose an action</p>
+                <div className="box">
+                  <Link className="button is-block is-success is-large is-fullwidth" to='/admin/products'>Add products</Link>
+                </div>
               </div>
+            </div>
           </div>
-      </section>
+        </section>
       </main>
     )
   }
 }
 
-export default Admin
+export default withAdminPermission(Admin)

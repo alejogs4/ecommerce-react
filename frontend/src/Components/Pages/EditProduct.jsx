@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import withAdminPermission from '../HOC/withAdminPermission'
 
 function EditProduct({ match, history }) {
   
@@ -90,4 +91,5 @@ function EditProduct({ match, history }) {
   )
 }
 
-export default withRouter(EditProduct)
+export default withAdminPermission(withRouter(EditProduct))
+// export default withRouter(EditProduct)
