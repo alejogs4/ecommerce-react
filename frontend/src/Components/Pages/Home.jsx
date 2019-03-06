@@ -23,6 +23,8 @@ class Home extends Component {
     }
   }
 
+  
+
   render() {
     const { img, active } = this.state
 

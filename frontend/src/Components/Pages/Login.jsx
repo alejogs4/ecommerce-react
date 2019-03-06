@@ -1,5 +1,5 @@
 import React, { Component, } from 'react'
-import { verify } from '../../Helpers/handleLocalStorage'
+import { verifyUser } from '../../Helpers/handleLocalStorage'
 import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
@@ -28,7 +28,7 @@ class Login extends Component {
       password: this.state.userPassword
     }
 
-    if (verify(user, 'users')) {
+    if (verifyUser(user, 'users')) {
       localStorage.setItem('currentUser', JSON.stringify(user))
       localStorage.setItem('loggued', true)
       alert("Logged in!")

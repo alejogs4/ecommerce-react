@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { add } from "../../Helpers/handleLocalStorage"
+import { addItem } from "../../Helpers/handleLocalStorage"
 
 class Signup extends Component {
 
@@ -26,7 +26,7 @@ class Signup extends Component {
         password: this.state.userPassword
       }
 
-      if (add(user, 'users')) {
+      if (addItem(user, 'users')) {
         alert("Signed Up!")
         this.props.history.push("/login")
       }

@@ -8,8 +8,8 @@ import Logo from '../../Images/LogoPNG.png';
 const logOut = () => {
   localStorage.setItem('loggued', false)
   localStorage.setItem('currentUser', "")
-  
 }
+
 
 const Header = () => (
   <nav className="navbar is-black" role="navigation" aria-label="main navigation">
@@ -38,10 +38,17 @@ const Header = () => (
         {(localStorage.loggued && JSON.parse(localStorage.loggued)) &&
           <div className="navbar-item">
             <div className="buttons">
-              <button className="button is-black">
-                {localStorage.currentUser ? JSON.parse(localStorage.currentUser).name : 'Usuario'}
+              <Link to={
+                localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin'
+                 ? '/admin' : '/'
+              } className="button is-black">{localStorage.currentUser ? JSON.parse(localStorage.currentUser).name : 'Usuario'}</Link>
+              <button 
+              className="button is-black"
+              >
+                
               </button>
-              <button className="button is-black" onClick={logOut}>Log Out</button>
+              <Link to="/" className="button is-black" onClick={logOut}>Log Out</Link>
+
               <Link to='/' className="button is-black">Shopping Cart</Link>
             </div>
           </div>
