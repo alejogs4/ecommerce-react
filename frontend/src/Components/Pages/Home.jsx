@@ -63,6 +63,17 @@ class Home extends Component {
               onClick={() => this.setState({ active: false })}></button>
           </div>
         </div>
+
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>
+              VANTABLACK by <a href="https://github.com/alejogs4">Alejandro Garcia</a>, 
+              <a href="https://github.com/maugarbru"> Mauricio Garzon</a> and  
+              <a href="https://github.com/mvelezg99"> Miguel Velez</a>. The source code is licensed
+              <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>.
+            </p>
+          </div>
+        </footer>
       </main>
     )
   }

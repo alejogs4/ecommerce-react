@@ -10,8 +10,14 @@
 
 .backColor {
     background-color: #292929;
+    
 }
 
 .column {
     border: 2px;
+}
+
+.footer {
+    background-color: #292929;
+    color: gray;
 }
