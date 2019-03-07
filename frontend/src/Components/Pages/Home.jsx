@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import '../Styles/home.css'
-
+import { Link } from 'react-router-dom'
 import Nombre from '../../Images/NombreBLANCO.png';
-import Product from '../Atoms/Product';
 import ProductsGrid from '../Molecules/ProductsGrid';
 
 class Home extends Component {
@@ -41,10 +40,10 @@ class Home extends Component {
 
         <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
           <ul>
-            <li className="is-active"><a href="#" aria-current="page">All</a></li>
-            <li><a href="#">Drawings</a></li>
-            <li><a href="#">Tattoos</a></li>
-            <li><a href="#">Others</a></li>
+            <li className="is-active"><Link to='/'>All</Link></li>
+            <li><Link to='/'>Drawings</Link></li>
+            <li><Link to='/'>Tattoos</Link></li>
+            <li><Link to='/'>Others</Link></li>
           </ul>
         </nav>
 

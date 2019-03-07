@@ -1,21 +1,21 @@
 /* unvisited link */
 a:link {
-    color: grey;
+    color: black;
 }
   
 /* visited link */
 a:visited {
-    color: grey;
+    color: black;
 }
   
 /* mouse over link */
 a:hover {
-    color: lightslategray;
+    color: white;
 }
   
   /* selected link */
 a:active {
-    color: white;
+    color: lightslategray;
 }
 
 .navbar .navbar-menu .navbar-start {

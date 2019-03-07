@@ -16,17 +16,13 @@ const Header = () => (
       <Link to='/' className="navbar-item">
         <img src={Nombre} alt="Nombre" width="112" height="28" />
       </Link>
-      <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="End">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
     </div>
     <div className="navbar-menu">
       <div className="navbar-start">
         <Link to='/' className="navbar-item"><img src={Logo} alt='Logo' width="28" height="28" /></Link>
       </div>
-      <div id="End" className="navbar-end">
+    </div>
+    <div id="End" className="navbar-end">
         {(localStorage.loggued && !JSON.parse(localStorage.loggued)) &&
           <div className="navbar-item">
             <div className="buttons">
@@ -51,7 +47,6 @@ const Header = () => (
           </div>
         }
       </div>
-    </div>
   </nav>
 )
 export default Header

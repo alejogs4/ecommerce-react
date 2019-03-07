@@ -45,12 +45,7 @@ class ShoppingCart extends Component {
       }))
       this.history.props.push("/")
     }
-    
-
-
-
   }
-
 
   render() {
     const { shopping, totalPrice, products } = this.state
@@ -72,8 +67,8 @@ class ShoppingCart extends Component {
                 </div>
               </div>
               <br />
-              <h2 className="title has-text-grey">Total price: {totalPrice}</h2  >
-              <button onClick={this.handleBuy} className="button is-success is-fullwidth">Buy</button>
+              <h2 className="title has-text-grey">Total price: {totalPrice}</h2>
+              <button onClick={this.handleBuy} className="button is-primary">Buy (not working yet)</button>
               <br />
               <h3 className="title has-text-white">Products List</h3>
               <div className="container">
