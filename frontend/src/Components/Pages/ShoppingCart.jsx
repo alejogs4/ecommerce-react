@@ -37,14 +37,12 @@ class ShoppingCart extends Component {
   }
 
   handleBuy = () => {
-    return () => {
-      localStorage.setItem('shopping', '[]')
-      this.setState(prev => ({
-        shopping: [],
-        totalPrice: 0
-      }))
-      this.history.props.push("/")
-    }
+    localStorage.setItem('shopping', '[]')
+    this.setState(prev => ({
+      shopping: [],
+      totalPrice: 0
+    }))
+    this.props.history.push("/")
   }
 
   render() {
@@ -68,7 +66,7 @@ class ShoppingCart extends Component {
               </div>
               <br />
               <h2 className="title has-text-grey">Total price: {totalPrice}</h2>
-              <button onClick={this.handleBuy} className="button is-primary">Buy (not working yet)</button>
+              <button onClick={this.handleBuy} className="button is-primary">Buy</button>
               <br />
               <h3 className="title has-text-white">Products List</h3>
               <div className="container">

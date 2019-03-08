@@ -25,7 +25,7 @@ class Home extends Component {
 
     return (
       <main>
-        <br/>
+        <br />
         <section className="hero">
           <div className="hero-body">
             <div className="container has-text-centered">
@@ -48,31 +48,25 @@ class Home extends Component {
         </nav>
 
         <br />
-        <div className="backColor">
-          <ProductsGrid products={products} click={this.openModal} />
-          <div className={`modal ${active && 'is-active'}`}>
-            <div className="modal-background"></div>
-            <div className="modal-content">
-              <p className="image is-4by3">
-                <img src={img} alt="" />
-              </p>
+        <section className="hero is-black">
+          <div className="hero-body">
+            <div className="container">
+              <ProductsGrid products={products} click={this.openModal} />
+              <div className={`modal ${active && 'is-active'}`}>
+                <div className="modal-background"></div>
+                <div className="modal-content">
+                  <p className="image is-4by3">
+                    <img src={img} alt="" />
+                  </p>
+                </div>
+                <button className="modal-close is-large"
+                  aria-label="close"
+                  onClick={() => this.setState({ active: false })}></button>
+              </div>
             </div>
-            <button className="modal-close is-large"
-              aria-label="close"
-              onClick={() => this.setState({ active: false })}></button>
           </div>
-        </div>
+        </section>
 
-        <footer className="footer">
-          <div className="content has-text-centered">
-            <p>
-              VANTABLACK by <a href="https://github.com/alejogs4">Alejandro Garcia</a>, 
-              <a href="https://github.com/maugarbru"> Mauricio Garzon</a> and  
-              <a href="https://github.com/mvelezg99"> Miguel Velez</a>. The source code is licensed
-              <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>.
-            </p>
-          </div>
-        </footer>
       </main>
     )
   }
