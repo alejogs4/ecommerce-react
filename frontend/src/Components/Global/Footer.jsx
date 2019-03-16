@@ -2,6 +2,9 @@ import React from 'react'
 import '../Styles/header.css'
 import Nombre from '../../Images/NombreNEGRO.png';
 
+/**
+ * This component represents the application's footer
+ */
 const Footer = () => (
 	<footer className="footer">
 		<div className="content has-text-centered">

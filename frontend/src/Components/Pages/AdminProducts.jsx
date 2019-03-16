@@ -4,8 +4,11 @@ import { withRouter } from 'react-router-dom'
 import ProductTableField from '../Atoms/ProductTableField';
 import withAdminPermission from '../HOC/withAdminPermission'
 
+/**
+ * This component represents the "Admin Products" screen,
+ * to manage the products of the application
+ */
 class AdminProducts extends Component {
-
   state = {
     productName: '',
     productType: '',
@@ -14,6 +17,10 @@ class AdminProducts extends Component {
     products: localStorage.products ? JSON.parse(localStorage.products) : []
   }
 
+  /**
+   * This function handles the changes on a field, changing the state
+   * of the component simultaneously.
+   */
   handleChange = (field) => {
     return e => {
       this.setState({
@@ -22,6 +29,10 @@ class AdminProducts extends Component {
     }
   }
 
+  /**
+   * This function handles the deletes of the items, deleting them from the data
+   * and from the application's state.
+   */
   handleDelete = (name) => {
     return () => {
       deleteItem(name, 'products')
@@ -31,7 +42,10 @@ class AdminProducts extends Component {
     }
   }
 
-
+  /**
+   * onSubmit will control the event of "submit" the form, adding the product
+   * to the data and clearing the application's state.
+   */
   onSubmit = (e) => {
     e.preventDefault()
     const { productName, productType, productPrice, productIMG } = this.state

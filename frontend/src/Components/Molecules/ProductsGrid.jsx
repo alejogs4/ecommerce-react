@@ -1,6 +1,9 @@
 import React from 'react'
 import Product from '../Atoms/Product';
 
+/**
+ * This component represents the Products Grid shown at the homepage.
+ */
 const ProductsGrid = ({ products, click }) => {
   return (
     <div className='columns is-multiline'>

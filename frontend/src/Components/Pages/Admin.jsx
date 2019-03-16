@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import withAdminPermission from '../HOC/withAdminPermission'
 
+/**
+ * This component represents the Admin's screen, where is shown the
+ * "Admin products" and "Admin users" buttons.
+ */
 class Admin extends Component {
-
   render() {
     return (
       <main>

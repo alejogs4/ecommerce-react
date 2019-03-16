@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+/**
+ * This function allows 
+ * @param {*} settings : 
+ */
 function useNotification(settings) {
   const [active, setActive] = useState(settings.active)
   const [type, setType] = useState(settings.type)

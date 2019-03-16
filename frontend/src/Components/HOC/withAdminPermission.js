@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PermissionDenied from '../Molecules/PermissionDenied';
 
+/**
+ * 
+ * @param {*} WrappedComponent 
+ */
 function withAdminPermission(WrappedComponent) {
   return class extends Component {
     render() {

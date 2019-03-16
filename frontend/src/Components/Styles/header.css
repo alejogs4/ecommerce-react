@@ -13,7 +13,7 @@ a:hover {
     color: grey;
 }
   
-  /* selected link */
+/* selected link */
 a:active {
     color: lightslategray;
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 
 /**
- * 
- * @param {*} props 
+ * Product is the class component that represents a "product" in the market 
+ * by its image.
+ * @param {*} props : Are the component properties.
  */
 const Product = (props) => (
     <figure className="image is-4by3" onClick={props.click}>

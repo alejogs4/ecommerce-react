@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * This component represents the "Permission Denied" screen,
+ * shown when a normal user attempts to access to admin's functions.
+ */
 const PermissionDenied = () => {
   return (
     <main>

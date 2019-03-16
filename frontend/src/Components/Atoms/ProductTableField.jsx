@@ -1,6 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+/**
+ * This component represents the products table for admin, 
+ * which shows product names, product types, product images, 
+ * product prices, a button to edit the product, and a button
+ * to remove the product from the data.
+ */
 const ProductTableField = ({ item, handleDelete }) => (
   <div className="columns is-desktop has-text-black">
     <div className="column">

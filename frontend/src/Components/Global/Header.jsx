@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom'
 import Nombre from '../../Images/NombreBLANCO.png';
 import Logo from '../../Images/LogoPNG.png';
 
-
+/**
+ * This function is to clear the current user data when
+ * the user logs out.
+ */
 const logOut = () => {
   localStorage.setItem('loggued', false)
   localStorage.setItem('currentUser', "")
   localStorage.setItem('shopping', '[]')
 }
 
+/**
+ * This component represents the application's header.
+ */
 const Header = () => (
   <nav className="navbar is-black is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
