@@ -1,10 +1,8 @@
 const express = require('express')
 const app = express()
 // Setup functions
-const setupExpress = require('./config/express')
-const setupApplicationRoutes = require('./config/routes')
+const setupGraphql = require('./graphql.config')
 
-setupExpress(app)
-setupApplicationRoutes(app)
+setupGraphql(app)
 
 module.exports = app

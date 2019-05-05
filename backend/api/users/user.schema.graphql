@@ -1,0 +1,8 @@
+type Users {
+  dni: String!
+  name: String!
+  lastname: String!
+  email: String!
+  password: String!
+  admin: Boolean!
+}

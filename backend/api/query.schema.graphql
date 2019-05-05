@@ -1,0 +1,6 @@
+type Query {
+  users: [Users]
+  user(dni: String!): Users!
+  products: [Product]
+  product(id: Int!): Product!
+}

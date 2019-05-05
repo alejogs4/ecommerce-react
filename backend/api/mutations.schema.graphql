@@ -1,0 +1,26 @@
+input UserInput {
+  dni: String!
+  name: String!
+  lastname: String!
+  email: String!
+  password: String!
+} 
+
+input ProductInput {
+  name: String!
+  description: String
+  price: Float!
+}
+
+type AuthPayload {
+  token: String
+  user: Users
+}
+
+type Mutation {
+  addUser(input: UserInput): Users!
+  login(email: String!, password: String!): AuthPayload
+  addProduct(input: ProductInput): Product
+  editProduct(id: Int, input: ProductInput): Product!
+  deleteProduct(id: Int): Product!
+}
