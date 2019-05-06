@@ -1,0 +1,4 @@
+type Cart {
+  dni_user: String!,
+  product_id: String!
+}

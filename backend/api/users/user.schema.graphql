@@ -5,4 +5,5 @@ type Users {
   email: String!
   password: String!
   admin: Boolean!
+  products: [Product]!
 }

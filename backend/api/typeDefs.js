@@ -6,11 +6,13 @@ const mutations = fs.readFileSync(`${__dirname}/mutations.schema.graphql`, { enc
 
 const users = fs.readFileSync(`${__dirname}/users/user.schema.graphql`, { encoding: 'utf8' })
 const products = fs.readFileSync(`${__dirname}/products/product.schema.graphql`, { encoding: 'utf8' })
+const cart = fs.readFileSync(`${__dirname}/cart/cart.schema.graphql`, { encoding: 'utf8' })
 
 
 const schema = gql`
   ${users}
   ${products}
+  ${cart}
   ${query}
   ${mutations}
 `

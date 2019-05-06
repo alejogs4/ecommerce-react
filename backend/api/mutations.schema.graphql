@@ -23,4 +23,5 @@ type Mutation {
   addProduct(input: ProductInput): Product
   editProduct(id: Int, input: ProductInput): Product!
   deleteProduct(id: Int): Product!
+  addProductCart(userDni: String!, productId: String!): Cart!
 }

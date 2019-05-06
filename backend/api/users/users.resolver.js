@@ -44,5 +44,11 @@ module.exports = {
       ($1, $2, $3, $4, $5) returning *`, userData)
     
     return user.rows[0]
+  },
+  async getProductsByUserDni({ dni }, _, ctx) {
+    const products = await ctx.database.query(`SELECT p.name, p.description, p.price, p.id FROM 
+      products as p INNER JOIN cart ON cart.product_id = p.id WHERE cart.dni_user = $1`, [dni])
+
+    return products.rows
   }
 }
