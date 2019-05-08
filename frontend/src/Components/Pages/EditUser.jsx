@@ -8,10 +8,6 @@ const EDIT_USER = gql`
   mutation editUser($id: Int!, $password: String!) {
     editUser(id: $id, password: $password) {
       id
-      name
-      lastname
-      email
-      admin
     }
   }
 `

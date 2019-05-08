@@ -9,7 +9,6 @@ import gql from 'graphql-tag'
 export const GET_USER_CART = gql`
   query getUserCart($id: Int!) {
     user(id: $id) {
-      id
       cart {
         id
         product {
