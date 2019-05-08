@@ -1,3 +1,7 @@
+/**
+ * @description Establishing all users functions to resolve the petitions propertly.
+ */
+
 const crypto = require('crypto')
 const { generateToken  } = require('../../services/auth')
 

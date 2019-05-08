@@ -1,3 +1,5 @@
+# Defining cart schema.
+
 type Cart {
   id: Int!
   id_user: Int!

@@ -1,3 +1,5 @@
+# Defining mutations schemas.
+
 input UserInput {
   name: String!
   lastname: String!

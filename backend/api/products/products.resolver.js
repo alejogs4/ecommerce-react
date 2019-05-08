@@ -1,3 +1,7 @@
+/**
+ * @description Establishing all products functions to resolve the petitions propertly.
+ */
+
 module.exports = {
   async getProducts(_, args, ctx) {
     const products = await ctx.database.query('SELECT id, name, description, price, image FROM products')

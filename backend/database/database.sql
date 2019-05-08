@@ -1,3 +1,13 @@
+--------------------------------
+-- DDL - DATABASE DEFINITION
+--------------------------------
+
+DROP DATABASE IF NOT EXISTS vantablack;
+
+CREATE DATABASE vantablack;
+
+USE vantablack;
+
 CREATE TABLE users (
   id serial,
   name varchar(100) NOT NULL,

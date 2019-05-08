@@ -1,3 +1,4 @@
+# Defining user schema.
 
 type Users {
   id: Int!

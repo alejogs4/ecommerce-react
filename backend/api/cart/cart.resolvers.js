@@ -1,3 +1,7 @@
+/**
+ * @description Establishing all carts functions to resolve the petitions propertly.
+ */
+
 module.exports = {
   async addProductCart(_, { id, productId }, ctx) {
     const cart = await ctx.database.query(`INSERT INTO cart(id_user, product_id)

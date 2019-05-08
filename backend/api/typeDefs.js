@@ -1,3 +1,6 @@
+/**
+ * @description Defining main graphql schemas.
+ */
 const { gql } = require('apollo-server-express')
 const fs = require('fs')
 

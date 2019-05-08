@@ -1,3 +1,7 @@
+/**
+ * @description Importing apollo server and graphql schemas.
+ */
+
 const { ApolloServer } = require('apollo-server-express')
 
 const typeDefs = require('./api/typeDefs')

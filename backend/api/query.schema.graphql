@@ -1,3 +1,5 @@
+# Defining queries schemas.
+
 type Query {
   users: [Users]
   user(id: Int!): Users!
