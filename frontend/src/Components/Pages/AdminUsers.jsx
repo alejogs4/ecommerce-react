@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { deleteItem } from "../../Helpers/handleLocalStorage"
 import { withRouter } from 'react-router-dom'
 import UsersTableField from '../Atoms/UsersTableField';
 import withAdminPermission from '../HOC/withAdminPermission'
