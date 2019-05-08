@@ -170,4 +170,4 @@ class AdminProducts extends Component {
   }
 }
 
-export default withRouter(AdminProducts)
+export default withAdminPermission(withRouter(AdminProducts))

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import useNotification from '../CustomHooks/useNotification';
 import { Mutation } from 'react-apollo'
 import { gql } from 'apollo-boost'
+import { GET_ALL_USERS } from './AdminUsers';
 
 const ADD_USER_MUTATION = gql`
   mutation addUser($user: UserInput) {
@@ -58,7 +59,7 @@ function Signup({ history }) {
               <h3 className="title has-text-white">Sign Up</h3>
               <p className="subtitle has-text-grey">Please register to proceed.</p>
               <div className="box">
-                <Mutation mutation={ADD_USER_MUTATION}>
+                <Mutation mutation={ADD_USER_MUTATION} refetchQueries={[{query: GET_ALL_USERS}]} awaitRefetchQueries>
                   {(addUser) => {
                     return (
                       <form onSubmit={onSubmit(addUser)} style={{ marginBottom: '1em' }}>

@@ -21,7 +21,7 @@ const DELETE_USER = gql`
   }
 `
 
-const GET_ALL_USERS = gql`
+export const GET_ALL_USERS = gql`
   query {
     users {
       id
@@ -80,4 +80,4 @@ const AdminUsers = () => (
 )
 
 
-export default withRouter(AdminUsers)
+export default withAdminPermission(withRouter(AdminUsers))
