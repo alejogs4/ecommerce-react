@@ -1,8 +1,17 @@
 module.exports = {
-  async addProductCart(_, { userDni, productId }, ctx) {
-    const cart = await ctx.database.query(`INSERT INTO cart(dni_user, product_id)
-       VALUES($1, $2) returning *`, [userDni, productId])
+  async addProductCart(_, { id, productId }, ctx) {
+    const cart = await ctx.database.query(`INSERT INTO cart(id_user, product_id)
+       VALUES($1, $2) returning *`, [id, productId])
 
     return cart.rows[0]
+  },
+  async deleteProductCart(_, { id }, ctx) {
+    const cart = await ctx.database.query('DELETE FROM cart WHERE id=$1 returning *', [id])
+    return cart.rows[0]
+  },
+  async deleteUserCart(_, { userId }, ctx) {
+    const cart = await ctx.database.query('DELETE FROM cart WHERE id_user=$1 returning *', [userId])
+    console.log(cart.rows)
+    return cart.rows
   }
 }

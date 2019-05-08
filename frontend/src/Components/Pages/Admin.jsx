@@ -30,4 +30,4 @@ class Admin extends Component {
   }
 }
 
-export default withAdminPermission(Admin)
+export default Admin

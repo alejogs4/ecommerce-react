@@ -1,5 +1,4 @@
 input UserInput {
-  dni: String!
   name: String!
   lastname: String!
   email: String!
@@ -10,6 +9,7 @@ input ProductInput {
   name: String!
   description: String
   price: Float!
+  image: String!
 }
 
 type AuthPayload {
@@ -19,9 +19,14 @@ type AuthPayload {
 
 type Mutation {
   addUser(input: UserInput): Users!
+  editUser(id: Int!, password: String!): Users!
+  deleteUser(id: Int!): Users
+  becomeAdmin(id: Int!): Users
   login(email: String!, password: String!): AuthPayload
   addProduct(input: ProductInput): Product
   editProduct(id: Int, input: ProductInput): Product!
   deleteProduct(id: Int): Product!
-  addProductCart(userDni: String!, productId: String!): Cart!
+  addProductCart(id: Int!, productId: String!): Cart!
+  deleteProductCart(id: Int!): Cart!
+  finishBuy(userId: Int!): [Cart!]
 }

@@ -1,10 +1,11 @@
 CREATE TABLE users (
-  dni varchar(15),
+  id serial,
   name varchar(100) NOT NULL,
   lastname varchar(100) NOT NULL,
   email varchar(100) NOT NULL,
   password varchar(200) NOT NULL,
-  CONSTRAINT pk_users PRIMARY KEY(dni)
+  admin boolean DEFAULT FALSE,
+  CONSTRAINT pk_users PRIMARY KEY(id)
 );
 
 CREATE TABLE products (
@@ -12,13 +13,15 @@ CREATE TABLE products (
   name VARCHAR(150) NOT NULL,
   description text,
   price float NOT NULL,
+  image varchar(500) DEFAULT '',
   CONSTRAINT pk_products PRIMARY KEY(id)
 );
 
 CREATE TABLE cart (
-  dni_user varchar(15),
+  id serial,
+  id_user int,
   product_id int,
-  CONSTRAINT pk_cart PRIMARY KEY(dni_user, product_id),
-  CONSTRAINT fk_user_cart FOREIGN KEY(dni_user) REFERENCES users(dni) ON DELETE CASCADE,
+  CONSTRAINT pk_cart PRIMARY KEY(id),
+  CONSTRAINT fk_user_cart FOREIGN KEY(id_user) REFERENCES users(id) ON DELETE CASCADE,
   CONSTRAINT fk_products_cart FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
 );

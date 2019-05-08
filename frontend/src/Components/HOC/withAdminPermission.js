@@ -8,7 +8,7 @@ import PermissionDenied from '../Molecules/PermissionDenied';
 function withAdminPermission(WrappedComponent) {
   return class extends Component {
     render() {
-      return !(localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin') 
+      return !(localStorage.user && JSON.parse(localStorage.user).admin) 
         ? <PermissionDenied />
         : <WrappedComponent {...this.props} />
     }

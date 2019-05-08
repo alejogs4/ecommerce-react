@@ -1,9 +1,10 @@
+
 type Users {
-  dni: String!
+  id: Int!
   name: String!
   lastname: String!
   email: String!
   password: String!
   admin: Boolean!
-  products: [Product]!
+  cart: [Cart]!
 }

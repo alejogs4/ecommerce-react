@@ -11,10 +11,7 @@ const ProductTableFieldShopping = ({ item, handleAdd}) => (
       {item.name}
     </div>
     <div className="column">
-      {item.type}
-    </div>
-    <div className="column">
-      {item.IMG}
+      {item.description}
     </div>
     <div className="column">
       {item.price}

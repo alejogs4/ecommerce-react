@@ -9,7 +9,7 @@ import Logo from '../../Images/LogoPNG.png';
  */
 const logOut = () => {
   localStorage.setItem('loggued', false)
-  localStorage.setItem('currentUser', "")
+  localStorage.removeItem('user')
   localStorage.setItem('shopping', '[]')
 }
 
@@ -41,10 +41,10 @@ const Header = () => (
         <div className="navbar-item">
           <div className="buttons">
             <Link to={
-              localStorage.currentUser && JSON.parse(localStorage.currentUser).name === 'admin'
-                ? '/admin' : '/edit/' + JSON.parse(localStorage.currentUser).name
+              localStorage.user && JSON.parse(localStorage.user).name === 'admin'
+                ? '/admin' : '/edit/' + JSON.parse(localStorage.user).id
             } className="button is-black">
-              {localStorage.currentUser ? (JSON.parse(localStorage.currentUser).name).toUpperCase() : 'Usuario'
+              {localStorage.user ? (JSON.parse(localStorage.user).name).toUpperCase() : 'Usuario'
               }
             </Link>
             <Link to="/" className="navbar-item button is-black" onClick={logOut}>Log Out</Link>

@@ -1,50 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
-import useNotification from '../CustomHooks/useNotification';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import Notification from '../Atoms/Notification';
+
+const EDIT_USER = gql`
+  mutation editUser($id: Int!, $password: String!) {
+    editUser(id: $id, password: $password) {
+      id
+      name
+      lastname
+      email
+      admin
+    }
+  }
+`
 
 function EditUser({ match, history }) {
-  
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [rePassword, setRePassword] = useState('')
-  const { Notification, updateNotification } = useNotification({ active: false, type: '', text: '' })
-
-  useEffect(() => {
-    const user = localStorage.users
-      ? JSON.parse(localStorage.currentUser)
-      : null
-
-    if (user) {
-      setName(user.name)
-      
-    }
-  }, [])
-
-  function edit(e) {
-    e.preventDefault()
-    if (password === rePassword) {
-      const newUser = {
-        password,
-        name,
+  function edit(editUser) {
+    return (e) => {
+      e.preventDefault()
+      const data = {
+        id: parseInt(match.params.name),
+        password: e.target.password.value,
       }
-
-      const index = localStorage.users
-        ? JSON.parse(localStorage.users).map(user => user.name).indexOf(match.params.name)
-        : -1
-        
-      if (index !== -1) {
-        const users = JSON.parse(localStorage.users)
-        console.log(users[index], newUser)
-        users[index] = newUser
-        localStorage.setItem('users', JSON.stringify(users))
-        localStorage.setItem('loggued', false)
-        localStorage.setItem('currentUser', "")
-        updateNotification(true, 'is-success', 'Password changed!')
-        setTimeout(() => history.push("/login"), 1000)
-      }
+      editUser({ variables: { ...data } })
+      setTimeout(() => history.push('/login'), 500)
     }
-    else updateNotification(true, 'is-danger', 'Passwords must match!')
-    return
   }
 
   return (
@@ -56,36 +38,28 @@ function EditUser({ match, history }) {
               <h3 className="title has-text-white">Change Password</h3>
               <p className="subtitle has-text-grey">Change your password and login again</p>
               <div className="box">
-                <form onSubmit={edit} style={{ marginBottom: '1em' }}>
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-warning" type="text" placeholder="Name" disabled autoFocus=""
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-warning" type="password" placeholder="New Password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-warning" type="password" placeholder="Re-enter password"
-                        value={rePassword}
-                        onChange={e => setRePassword(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-                  <input className="button is-block is-warning is-large is-fullwidth" type="submit" value="Edit" />
-                </form>
-                {Notification}
+                <Mutation mutation={EDIT_USER}>
+                  {(editUser, { data, error }) => {                 
+                    if (data && data.editUser) {
+                      localStorage.setItem('loggued', false)
+                      localStorage.removeItem('user')
+                      return null
+                    }
+                    return (
+                      <form onSubmit={edit(editUser)} style={{ marginBottom: '1em' }} >
+                        <div className="field">
+                          <div className="control">
+                            <input className="input is-large is-warning" type="password" placeholder="Password"
+                              name='password'
+                              required />
+                          </div>
+                        </div>
+                        <input className="button is-block is-warning is-large is-fullwidth" type="submit" value="Edit" />
+                        {error && <Notification type='is-danger' text='Error updating your password' />}
+                      </form>
+                    )
+                  }}
+                </Mutation>
               </div>
             </div>
           </div>

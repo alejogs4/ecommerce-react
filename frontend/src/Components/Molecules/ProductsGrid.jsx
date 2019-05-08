@@ -9,7 +9,7 @@ const ProductsGrid = ({ products, click }) => {
     <div className='columns is-multiline'>
       {products && products.map(product => (
         <div className="column is-one-quarter">
-          <Product img={product.IMG} click={click(product.IMG)} />
+          <Product img={product.image} click={click(product.image)} />
         </div>
       ))}
     </div>

@@ -1,31 +1,33 @@
 import React, { useState } from 'react'
-import { verifyUser } from '../../Helpers/handleLocalStorage'
 import { withRouter } from 'react-router-dom'
-import useNotification from '../CustomHooks/useNotification';
+import { Mutation } from 'react-apollo'
+import { gql } from 'apollo-boost'
+import Notification from '../Atoms/Notification';
+
+const LOGIN_MUTATION = gql`
+ mutation login($email: String!, $password: String!) {
+   login(email: $email, password: $password) {
+     token
+     user {
+       name
+       email
+       lastname
+       admin
+       id
+     }
+   }
+ }
+`
 
 function Login({ history }) {
-  const [userName, setUserName] = useState('')
-  const [userPassword, setUserPassword] = useState('')
-  const { Notification, updateNotification } = useNotification({ text: '', active: false, type: '' })
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  function onSubmit(e) {
-    e.preventDefault()
-
-    const user = { name: userName, password: userPassword }
-
-    if (verifyUser(user, 'users')) {
-      localStorage.setItem('currentUser', JSON.stringify(user))
-      localStorage.setItem('loggued', true)
-      history.push("/")
-      return
+  function onSubmit(login) {
+    return async e => {
+      e.preventDefault()
+      login({ variables: { email, password } })
     }
-    if (user.name === 'admin' && user.password === 'admin') {
-      localStorage.setItem('currentUser', JSON.stringify(user))
-      localStorage.setItem('loggued', true)
-      history.push("/admin")
-      return
-    }
-    updateNotification(true, 'is-danger', `This user doesn't exist`)
   }
 
   return (
@@ -37,26 +39,42 @@ function Login({ history }) {
               <h3 className="title has-text-white">Login</h3>
               <p className="subtitle has-text-grey">Please login to proceed.</p>
               <div className="box">
-                <form onSubmit={onSubmit} style={{ marginBottom: '1em' }}>
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-info is-large" type="text" placeholder="Your Name" autoFocus=""
-                        value={userName}
-                        onChange={e => setUserName(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-info is-large" type="password" placeholder="Your Password"
-                        value={userPassword}
-                        onChange={e => setUserPassword(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-                  <input className="button is-block is-info is-large is-fullwidth" type="submit" value="Log In" />
-                </form>
-                {Notification}
+                <Mutation mutation={LOGIN_MUTATION}>
+                  {(login, { error, data }) => {
+                    if (data && data.login) {
+                      localStorage.setItem('user', JSON.stringify(data.login.user))
+                      localStorage.setItem('token', data.login.token)
+                      localStorage.setItem('loggued', true)
+                      history.push(data.login.user.admin ? '/admin' : '/')
+                      return null
+                    }
+                    
+                    return (
+                      <>
+                        <form onSubmit={onSubmit(login)} style={{ marginBottom: '1em' }}>
+                          <div className="field">
+                            <div className="control">
+                              <input className="input is-info is-large" type="text" placeholder="Your Email" autoFocus=""
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                required />
+                            </div>
+                          </div>
+                          <div className="field">
+                            <div className="control">
+                              <input className="input is-info is-large" type="password" placeholder="Your Password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                required />
+                            </div>
+                          </div>
+                          <input className="button is-block is-info is-large is-fullwidth" type="submit" value="Log In" />
+                        </form>
+                        {error && <Notification type='is-danger' text='This doesnt exists' />}
+                      </>
+                    )
+                  }}
+                </Mutation>
               </div>
             </div>
           </div>

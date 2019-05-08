@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
 import '../Styles/home.css'
-import { Link } from 'react-router-dom'
 import Nombre from '../../Images/NombreBLANCO.png';
 import ProductsGrid from '../Molecules/ProductsGrid';
+import { Query } from 'react-apollo'
+import { gql } from 'apollo-boost'
+
+export const PRODUCTS_QUERY = gql`
+  query {
+    products {
+      image
+    }
+  }
+`
 
 class Home extends Component {
   state = {
     img: '',
     active: false,
-    products: localStorage.products ? JSON.parse(localStorage.products) : []
   }
 
   openModal = (img) => {
@@ -21,7 +29,7 @@ class Home extends Component {
   }
 
   render() {
-    const { img, active, products } = this.state
+    const { img, active } = this.state
 
     return (
       <main>
@@ -35,23 +43,25 @@ class Home extends Component {
             </div>
           </div>
         </section>
-
         <br />
-
-        <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
+        {/* <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
           <ul>
             <li className="is-active"><Link to='/'>All</Link></li>
             <li><Link to='/'>Drawings</Link></li>
             <li><Link to='/'>Tattoos</Link></li>
             <li><Link to='/'>Others</Link></li>
           </ul>
-        </nav>
+        </nav> */}
 
         <br />
         <section className="hero is-black">
           <div className="hero-body">
             <div className="container">
-              <ProductsGrid products={products} click={this.openModal} />
+              <Query query={PRODUCTS_QUERY}>
+                {({ data }) => (
+                  <ProductsGrid products={data.products} click={this.openModal} />
+                )}
+              </Query>
               <div className={`modal ${active && 'is-active'}`}>
                 <div className="modal-background"></div>
                 <div className="modal-content">

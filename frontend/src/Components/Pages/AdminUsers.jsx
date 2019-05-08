@@ -3,6 +3,35 @@ import { deleteItem } from "../../Helpers/handleLocalStorage"
 import { withRouter } from 'react-router-dom'
 import UsersTableField from '../Atoms/UsersTableField';
 import withAdminPermission from '../HOC/withAdminPermission'
+import gql from 'graphql-tag';
+import { Mutation, Query } from 'react-apollo';
+
+const BECOME_ADMIN = gql`
+  mutation becomeAdmin($id: Int!) {
+    becomeAdmin(id: $id) {
+      name
+    }
+  }
+`
+
+const DELETE_USER = gql`
+  mutation deleteUser($id: Int!) {
+    deleteUser(id: $id) {
+      name
+    }
+  }
+`
+
+const GET_ALL_USERS = gql`
+  query {
+    users {
+      id
+      name
+      admin
+      email
+    }
+  }
+`
 
 /**
  * This component represents the "Admin Users" screen,
@@ -40,11 +69,30 @@ class AdminUsers extends Component {
               </div>
               <div className="container">
                 <div className="notification">
-                  {this.state.users.map((item, key) => (
-                    <UsersTableField key={key}
-                      item={item}
-                      handleDelete={this.handleDelete(item)} />
-                  ))}
+                  <Mutation mutation={BECOME_ADMIN}
+                    refetchQueries={[{ query: GET_ALL_USERS }]}
+                    awaitRefetchQueries>
+                    {(becomeAdmin) => (
+                      <Mutation mutation={DELETE_USER}
+                        refetchQueries={[{ query: GET_ALL_USERS }]}
+                        awaitRefetchQueries>
+                        {(deleteUser) => (
+                          <Query query={GET_ALL_USERS}>
+                            {({ data }) => (
+                              <>
+                                {data && data.users && data.users.map((user) => (
+                                  <UsersTableField key={user.id}
+                                    item={user}
+                                    handleDelete={() => deleteUser({ variables: { id: user.id } })}
+                                    becomeAdmin={() => becomeAdmin({ variables: { id: user.id } })} />
+                                ))}
+                              </>
+                            )}
+                          </Query>
+                        )}
+                      </Mutation>
+                    )}
+                  </Mutation>
                 </div>
               </div>
             </div>
@@ -55,4 +103,4 @@ class AdminUsers extends Component {
   }
 }
 
-export default withAdminPermission(withRouter(AdminUsers))
+export default withRouter(AdminUsers)

@@ -19,7 +19,7 @@ import Footer from './Components/Global/Footer'
 function App() {
 
   useEffect(() => {
-    if (localStorage.loggued === undefined) localStorage.setItem('loggued', false)
+    if (localStorage.token === undefined) localStorage.setItem('loggued', false)
     open()
   }, [])
 

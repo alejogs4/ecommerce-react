@@ -1,6 +1,6 @@
-const { addUser, getUsers, login, getSingleUser, getProductsByUserDni } = require('./users/users.resolver')
+const { addUser, getUsers, login, getSingleUser, getProductsByUserDni, editUser, getProductsByCartId, deleteUserById, becomeAdmin } = require('./users/users.resolver')
 const { getProducts, addProduct, getSingleProduct, editProduct, deleteProduct } = require('./products/products.resolver')
-const { addProductCart } = require('./cart/cart.resolvers')
+const { addProductCart, deleteProductCart, deleteUserCart } = require('./cart/cart.resolvers')
 
 module.exports = {
   Query: {
@@ -15,9 +15,17 @@ module.exports = {
     addProduct,
     editProduct,
     deleteProduct,
-    addProductCart
+    addProductCart,
+    deleteProductCart,
+    editUser,
+    becomeAdmin,
+    finishBuy: deleteUserCart,
+    deleteUser: deleteUserById
   },
   Users: {
-    products: getProductsByUserDni
+    cart: getProductsByUserDni,
+  },
+  Cart: {
+    product: getProductsByCartId 
   }
 }

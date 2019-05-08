@@ -1,47 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import withAdminPermission from '../HOC/withAdminPermission'
+import { Query, Mutation } from 'react-apollo'
+import { gql } from 'apollo-boost'
+import { PRODUCTS_QUERY_NAME } from './AdminProducts';
+
+const QUERY_SINGLE_PRODUCT = gql`
+  query getSingleProduct($id: Int!) {
+    product(id: $id) {
+      name
+      description
+      image
+      price
+    }
+  }
+`
+
+const EDIT_PRODUCT_MUTATION = gql`
+  mutation editProduct($id: Int, $input: ProductInput) {
+    editProduct(id: $id, input: $input) {
+      name
+    }
+  }
+`
 
 function EditProduct({ match, history }) {
-  
-  const [name, setName] = useState('')
-  const [img, setImg] = useState('')
-  const [price, setPrice] = useState('')
-  const [type, setType] = useState('')
 
-  useEffect(() => {
-    const product = localStorage.products
-      ? JSON.parse(localStorage.products).find(_product => _product.name === match.params.name)
-      : null
-
-    if (product) {
-      setName(product.name)
-      setImg(product.IMG)
-      setPrice(product.price)
-      setType(product.type)
-    }
-  }, [])
-
-  function edit(e) {
-    e.preventDefault()
-    const newProduct = {
-      IMG: img,
-      name,
-      price,
-      type
-    }
-
-    const index = localStorage.products
-      ? JSON.parse(localStorage.products).map(product => product.name).indexOf(match.params.name)
-      : -1
-      
-    if (index !== -1) {
-      const products = JSON.parse(localStorage.products)
-      console.log(products[index], newProduct)
-      products[index] = newProduct
-      localStorage.setItem('products', JSON.stringify(products))
+  function edit(editProduct, refetch) {
+    return async e => {
+      e.preventDefault()
+      const form = e.target
+      const input = {
+        image: form.image.value,
+        name: form.name.value,
+        price: parseFloat(form.price.value),
+        description: form.description.value
+      }
+      await editProduct({ variables: { input, id: parseInt(match.params.name) } })
       history.push('/admin/products')
     }
+  }
+
+  function update(cache, { data: { editProduct } }) {
+    const { products } = cache.readQuery({ query: PRODUCTS_QUERY_NAME })
+    cache.writeQuery({ query: PRODUCTS_QUERY_NAME, data: { products: products.concat(editProduct) } })
   }
 
   return (
@@ -53,35 +55,62 @@ function EditProduct({ match, history }) {
               <h3 className="title has-text-white">Edit</h3>
               <p className="subtitle has-text-grey">Edit products as you like</p>
               <div className="box">
-                <form onSubmit={edit}>
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-danger" type="text" placeholder="Name" autoFocus=""
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        required />
-                    </div>
-                  </div>
+                <Query query={QUERY_SINGLE_PRODUCT} variables={{ id: parseInt(match.params.name) }}>
+                  {(query) => {
+                    if (query.loading) return <p>Loading...</p>
+                    return (
+                      <Mutation mutation={EDIT_PRODUCT_MUTATION}
+                        refetchQueries={[
+                          {query: QUERY_SINGLE_PRODUCT, variables: { id: parseInt(match.params.name) }},
+                          {query: PRODUCTS_QUERY_NAME}
+                        ]}
+                      update={update}>
+                        {(editProduct) => {
+                          return (
+                            <form onSubmit={edit(editProduct)}>
+                              <div className="field">
+                                <div className="control">
+                                  <input className="input is-large is-danger" type="text" placeholder="Name" autoFocus=""
+                                    defaultValue={query.data.product.name}
+                                    name='name'
+                                    required />
+                                </div>
+                              </div>
 
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-danger" type="url" placeholder="Img URL"
-                        value={img}
-                        onChange={e => setImg(e.target.value)}
-                        required />
-                    </div>
-                  </div>
+                              <div className="field">
+                                <div className="control">
+                                  <input className="input is-large is-danger" type="text" placeholder="Description" autoFocus=""
+                                    defaultValue={query.data.product.description}
+                                    name='description'
+                                    required />
+                                </div>
+                              </div>
 
-                  <div className="field">
-                    <div className="control">
-                      <input className="input is-large is-danger" type="number" placeholder="Price"
-                        value={price}
-                        onChange={e => setPrice(e.target.value)}
-                        required />
-                    </div>
-                  </div>
-                  <input className="button is-block is-danger is-large is-fullwidth" type="submit" value="Edit" />
-                </form>
+                              <div className="field">
+                                <div className="control">
+                                  <input className="input is-large is-danger" type="url" placeholder="Img URL"
+                                    defaultValue={query.data.product.image}
+                                    name='image'
+                                    required />
+                                </div>
+                              </div>
+
+                              <div className="field">
+                                <div className="control">
+                                  <input className="input is-large is-danger" type="number" placeholder="Price"
+                                    defaultValue={query.data.product.price}
+                                    name='price'
+                                    required />
+                                </div>
+                              </div>
+                              <input className="button is-block is-danger is-large is-fullwidth" type="submit" value="Edit" />
+                            </form>
+                          )
+                        }}
+                      </Mutation>
+                    )
+                  }}
+                </Query>
               </div>
             </div>
           </div>
@@ -91,5 +120,5 @@ function EditProduct({ match, history }) {
   )
 }
 
-export default withAdminPermission(withRouter(EditProduct))
+export default withRouter(EditProduct)
 // export default withRouter(EditProduct)

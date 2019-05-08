@@ -1,12 +1,12 @@
 module.exports = {
   async getProducts(_, args, ctx) {
-    const products = await ctx.database.query('SELECT id, name, description, price FROM products')
+    const products = await ctx.database.query('SELECT id, name, description, price, image FROM products')
 
     return products.rows
   },
   async getSingleProduct(_, args, ctx) {
     const { id } = args
-    const product = await ctx.database.query(`SELECT id, name, description, price FROM products WHERE id=$1`, [id])
+    const product = await ctx.database.query(`SELECT id, name, description, price, image FROM products WHERE id=$1`, [id])
 
     if (!product.rows[0]) {
       throw new Error(`The product with the id ${id} doesn't exists`)
@@ -15,11 +15,11 @@ module.exports = {
     return product.rows[0]
   },
   async addProduct(_, { input }, ctx) {
-    const { name, description, price } = input
-    const productData = [name, description, price]
+    const { name, description, price, image } = input
+    const productData = [name, description, price, image]
     try {
-      const product = await ctx.database.query(`INSERT INTO products(name, description, price)
-       VALUES($1, $2, $3) returning *`, productData)
+      const product = await ctx.database.query(`INSERT INTO products(name, description, price, image)
+       VALUES($1, $2, $3, $4) returning *`, productData)
 
       return product.rows[0]
     }

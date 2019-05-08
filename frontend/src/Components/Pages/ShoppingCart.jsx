@@ -1,52 +1,76 @@
 import React, { Component } from 'react'
-import { deleteItem, addItem } from "../../Helpers/handleLocalStorage"
 import { withRouter } from 'react-router-dom'
 
 import ProductTableFieldShopping from '../Atoms/ProductsTableShopping'
 import ProductTableFieldCart from '../Atoms/ProductsTableCart'
+import { Mutation, Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+export const GET_USER_CART = gql`
+  query getUserCart($id: Int!) {
+    user(id: $id) {
+      id
+      cart {
+        id
+        product {
+          name
+          price
+        }
+      }
+    }
+  }
+`
+
+const GET_PRODUCTS_TO_SALE = gql`
+  query {
+    products {
+      id
+      name
+      price
+      description
+    }
+  }
+`
+
+const ADD_PRODUCT_TO_CART = gql`
+  mutation addProductToCart($userId: Int!, $item: String!) {
+    addProductCart(id: $userId, productId: $item) {
+      id_user
+    }
+  }
+`
+
+const FINISH_BUY_MUTATION = gql`
+  mutation finishBuy($user_id: Int!) {
+    finishBuy(userId: $user_id) {
+      id
+    }
+  }
+`
 
 class ShoppingCart extends Component {
 
-  state = {
-    products: localStorage.products ? JSON.parse(localStorage.products) : [],
-    shopping: localStorage.shopping ? JSON.parse(localStorage.shopping) : [],
-    totalPrice:
-      localStorage.shopping
-        ? JSON.parse(localStorage.shopping).map(shopping => parseInt(shopping.price)).reduce((a, b) => a + b, 0)
-        : 0
-  }
-
-  handleAdd = (item) => {
+  handleAdd = ({ item, addProductToCart }) => {
     return () => {
-      addItem(item, 'shopping', false)
-      this.setState(prev => ({
-        shopping: localStorage.shopping ? JSON.parse(localStorage.shopping) : [],
-        totalPrice: prev.totalPrice + parseInt(item.price)
-      }))
+      const userId = localStorage.user ? JSON.parse(localStorage.user).id : -1
+      addProductToCart({ variables: { userId, item: `${item}` } })
     }
   }
 
-  handleDelete = (item) => {
-    return () => {
-      deleteItem(item, 'shopping')
-      this.setState(prev => ({
-        shopping: localStorage.shopping ? JSON.parse(localStorage.shopping) : [],
-        totalPrice: prev.totalPrice - parseInt(item.price)
-      }))
-    }
+  handleBuy = async (finishBuy) => {
+    const { history } = this.props
+    await finishBuy()
+    history.push('/')
   }
 
-  handleBuy = () => {
-    localStorage.setItem('shopping', '[]')
-    this.setState(prev => ({
-      shopping: [],
-      totalPrice: 0
-    }))
-    this.props.history.push("/")
+  calculateTotalPrice(data) {
+    if (!data || !data.user || data.user.cart.length === 0) return 0
+
+    return data.user.cart.map(product => product.product).map(product => product.price).reduce((a, b) => a + b)
   }
 
   render() {
-    const { shopping, totalPrice, products } = this.state
+    const userId = localStorage.user ? JSON.parse(localStorage.user).id : -1
 
     return (
       <main>
@@ -55,37 +79,62 @@ class ShoppingCart extends Component {
           <div className="hero-body">
             <div className="container has-text-centered">
               <h3 className="title has-text-white">Shopping Cart</h3>
-              <div className="container">
-                <div className="notification">
-                  {shopping.map((item, key) => (
-                    <ProductTableFieldCart key={key}
-                      item={item}
-                      handleDelete={this.handleDelete(item)} />
-                  ))}
-                </div>
-              </div>
-              <br />
-              <h2 className="title has-text-grey">Total price: {totalPrice}</h2>
-              <button onClick={this.handleBuy} className="button is-primary">Buy</button>
+              <Query query={GET_USER_CART} variables={{ id: userId }} fetchPolicy='network-only'>
+                {({ data }) => (
+                  <>
+                    <div className="container">
+                      <div className="notification">
+                        {data && data.user && data.user.cart.map((item) => (
+                          <ProductTableFieldCart key={item.id}
+                            item={item}
+                            userId={userId} />
+                        ))}
+                      </div>
+                    </div>
+                    <br />
+                    <h2 className="title has-text-grey">
+                      Total price: {this.calculateTotalPrice(data)}
+                    </h2>
+                  </>
+                )}
+              </Query>
+              <Mutation mutation={FINISH_BUY_MUTATION}
+                variables={{ user_id: userId }}
+                refetchQueries={[
+                  { query: GET_USER_CART, variables: { id: userId } }
+                ]}
+                awaitRefetchQueries={true}>
+                {(finishBuy, { loading }) => (
+                  <button onClick={ () =>  this.handleBuy(finishBuy)} className="button is-primary">{loading ? 'Buying' : 'Buy'}</button>
+                )}
+              </Mutation>
               <br />
               <h3 className="title has-text-white">Products List</h3>
               <div className="container">
                 <div className="notification">
-                  {products.map((item, key) => (
-                    <ProductTableFieldShopping key={key}
-                      item={item}
-                      handleAdd={this.handleAdd(item)} />
-                  ))}
+                  <Mutation mutation={ADD_PRODUCT_TO_CART}
+                    refetchQueries={['getUserCart']}
+                    awaitRefetchQueries={true}>
+                    {(addProductToCart) => (
+                      <Query query={GET_PRODUCTS_TO_SALE}>
+                        {({ data }) => (
+                          <>
+                            {data && data.products && data.products.map((item, key) => (
+                              <ProductTableFieldShopping key={key}
+                                item={item}
+                                userId={userId}
+                                handleAdd={this.handleAdd({ item: item.id, addProductToCart })} />
+                            ))}
+                          </>
+                        )}
+                      </Query>
+                    )}
+                  </Mutation>
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </section>
-
       </main>
     )
   }

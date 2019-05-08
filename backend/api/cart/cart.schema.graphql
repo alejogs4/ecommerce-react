@@ -1,4 +1,6 @@
 type Cart {
-  dni_user: String!,
+  id: Int!
+  id_user: Int!
   product_id: String!
+  product: Product
 }
