@@ -37,70 +37,48 @@ const GET_ALL_USERS = gql`
  * This component represents the "Admin Users" screen,
  * to manage the users of the application
  */
-class AdminUsers extends Component {
-
-  state = {
-    userName: '',
-    users: localStorage.users ? JSON.parse(localStorage.users) : []
-  }
-
-  /**
-   * This function handles the deletes of the items, deleting them from the data
-   * and from the application's state.
-   */
-  handleDelete = (name) => {
-    return () => {
-      deleteItem(name, 'users')
-      this.setState({
-        users: localStorage.users ? JSON.parse(localStorage.users) : []
-      })
-    }
-  }
-
-  render() {
-    return (
-      <main>
-        <section className="hero is-black is-fullheight">
-          <div className="hero-body">
-            <div className="container has-text-centered">
-              <div className="column is-4 is-offset-4">
-                <h3 className="title has-text-white">Users Manager</h3>
-                <p className="subtitle has-text-grey">Delete users as you like</p>
-              </div>
-              <div className="container">
-                <div className="notification">
-                  <Mutation mutation={BECOME_ADMIN}
+const AdminUsers = () => (
+  <main>
+    <section className="hero is-black is-fullheight">
+      <div className="hero-body">
+        <div className="container has-text-centered">
+          <div className="column is-4 is-offset-4">
+            <h3 className="title has-text-white">Users Manager</h3>
+            <p className="subtitle has-text-grey">Delete users as you like</p>
+          </div>
+          <div className="container">
+            <div className="notification">
+              <Mutation mutation={BECOME_ADMIN}
+                refetchQueries={[{ query: GET_ALL_USERS }]}
+                awaitRefetchQueries>
+                {(becomeAdmin) => (
+                  <Mutation mutation={DELETE_USER}
                     refetchQueries={[{ query: GET_ALL_USERS }]}
                     awaitRefetchQueries>
-                    {(becomeAdmin) => (
-                      <Mutation mutation={DELETE_USER}
-                        refetchQueries={[{ query: GET_ALL_USERS }]}
-                        awaitRefetchQueries>
-                        {(deleteUser) => (
-                          <Query query={GET_ALL_USERS}>
-                            {({ data }) => (
-                              <>
-                                {data && data.users && data.users.map((user) => (
-                                  <UsersTableField key={user.id}
-                                    item={user}
-                                    handleDelete={() => deleteUser({ variables: { id: user.id } })}
-                                    becomeAdmin={() => becomeAdmin({ variables: { id: user.id } })} />
-                                ))}
-                              </>
-                            )}
-                          </Query>
+                    {(deleteUser) => (
+                      <Query query={GET_ALL_USERS}>
+                        {({ data }) => (
+                          <>
+                            {data && data.users && data.users.map((user) => (
+                              <UsersTableField key={user.id}
+                                item={user}
+                                handleDelete={() => deleteUser({ variables: { id: user.id } })}
+                                becomeAdmin={() => becomeAdmin({ variables: { id: user.id } })} />
+                            ))}
+                          </>
                         )}
-                      </Mutation>
+                      </Query>
                     )}
                   </Mutation>
-                </div>
-              </div>
+                )}
+              </Mutation>
             </div>
           </div>
-        </section>
-      </main>
-    )
-  }
-}
+        </div>
+      </div>
+    </section>
+  </main>
+)
+
 
 export default withRouter(AdminUsers)
