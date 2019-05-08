@@ -41,10 +41,10 @@ const Header = () => (
         <div className="navbar-item">
           <div className="buttons">
             <Link to={
-              (localStorage.user && localStorage.user.admin) && JSON.parse(localStorage.user).admin 
+              (localStorage.user) && JSON.parse(localStorage.user).admin 
                 ? '/admin' : '/edit/' + JSON.parse(localStorage.user).id
             } className="button is-black">
-              {(localStorage.user && localStorage.user.name) ? (JSON.parse(localStorage.user).name).toUpperCase() : 'Usuario'
+              {(localStorage.user) ? (JSON.parse(localStorage.user).name).toUpperCase() : 'Usuario'
               }
             </Link>
             <Link to="/" className="navbar-item button is-black" onClick={logOut}>Log Out</Link>
