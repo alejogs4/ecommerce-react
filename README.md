@@ -18,10 +18,10 @@ You will be able as admin to:
 
 To explore the project you should follow these steps:
 * Install [Node.js](https://nodejs.org/es/).
-* Install [PostgreSQL] (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads).
+* Install [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads).
 * Open the pgAdmin (3 or 4).
-* Import/Execute the *database.sql* SQL file:
-...
+* Import/Execute the *[database.sql](https://github.com/alejogs4/ecommerce-react/blob/master/backend/database/database.sql)* SQL file:
+
 * Open CMD in 'backend' directory:
 ```
 cd Documents/Github/ecommerce-react/backend
