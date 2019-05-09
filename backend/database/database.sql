@@ -1,6 +1,6 @@
---------------------------------
+-------------------------------------------------
 -- DDL - DATABASE DEFINITION
---------------------------------
+-------------------------------------------------
 
 DROP DATABASE IF NOT EXISTS vantablack;
 
@@ -35,3 +35,10 @@ CREATE TABLE cart (
   CONSTRAINT fk_user_cart FOREIGN KEY(id_user) REFERENCES users(id) ON DELETE CASCADE,
   CONSTRAINT fk_products_cart FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
 );
+
+-------------------------------------------------
+-- DML - DATABASE MANIPULATION
+-------------------------------------------------
+
+INSERT INTO users(name, lastname, email, password, admin) VALUES
+('admin', 'admin', 'admin@gmail.com', '47dfbc37d2577197c6db50e5e52693a27dee2f3725671e2bb917f9b38fd44795', TRUE);
