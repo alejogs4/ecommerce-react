@@ -8,6 +8,11 @@ import React from 'react'
 const ProductTableFieldShopping = ({ item, handleAdd}) => (
   <div className="columns is-desktop has-text-black">
     <div className="column">
+      <figure className="image is-48x48">
+        <img className="is-rounded" src={item.image} alt=""/>
+      </figure>
+    </div>
+    <div className="column">
       {item.name}
     </div>
     <div className="column">

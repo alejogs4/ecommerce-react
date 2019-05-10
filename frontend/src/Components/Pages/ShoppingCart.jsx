@@ -27,6 +27,7 @@ const GET_PRODUCTS_TO_SALE = gql`
       name
       price
       description
+      image
     }
   }
 `
@@ -81,7 +82,7 @@ class ShoppingCart extends Component {
               <Query query={GET_USER_CART} variables={{ id: userId }} fetchPolicy='network-only'>
                 {({ data }) => (
                   <>
-                    <div className="container">
+                    <div className="container is-fluid">
                       <div className="notification">
                         {data && data.user && data.user.cart.map((item) => (
                           <ProductTableFieldCart key={item.id}
@@ -91,9 +92,11 @@ class ShoppingCart extends Component {
                       </div>
                     </div>
                     <br />
-                    <h2 className="title has-text-grey">
+                    <span className="tag is-large">
                       Total price: {this.calculateTotalPrice(data)}
-                    </h2>
+                    </span>
+                    <br/>
+                    <br/>
                   </>
                 )}
               </Query>
@@ -104,12 +107,12 @@ class ShoppingCart extends Component {
                 ]}
                 awaitRefetchQueries={true}>
                 {(finishBuy, { loading }) => (
-                  <button onClick={ () =>  this.handleBuy(finishBuy)} className="button is-primary">{loading ? 'Buying' : 'Buy'}</button>
+                  <button onClick={ () =>  this.handleBuy(finishBuy)} className="button is-large is-primary">{loading ? 'Buying' : 'Buy'}</button>
                 )}
               </Mutation>
               <br />
               <h3 className="title has-text-white">Products List</h3>
-              <div className="container">
+              <div className="container is-fluid">
                 <div className="notification">
                   <Mutation mutation={ADD_PRODUCT_TO_CART}
                     refetchQueries={['getUserCart']}
