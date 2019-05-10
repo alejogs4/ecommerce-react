@@ -67,12 +67,11 @@ class Home extends Component {
                 }}
               </Query>
               <div className={`modal ${active && 'is-active'}`}>
-                <div className="modal-background"></div>
+                <div className="modal-background" onClick={() => this.setState({ active: false })}></div>
                 <div className="modal-card">
                   <header className="modal-card-head">
                     <p className="modal-card-title">Nombre</p>
                     <span className="tag is-large">Precio</span>
-                    <button className="delete" aria-label="close" onClick={() => this.setState({ active: false })}></button>
                   </header>
                   <section className="modal-card-body">
                     <p className="image is-4by3">
