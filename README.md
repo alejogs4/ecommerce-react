@@ -24,7 +24,7 @@ To explore the project you should follow these steps:
 
 * Open CMD in 'backend' directory:
 ```
-cd Documents/Github/ecommerce-react/backend
+cd backend
 ```
 * Set up the Node.js server:
 ```
@@ -32,7 +32,7 @@ node server.js
 ```
 * Open CMD in 'frontend' directory:
 ```
-cd Documents/Github/ecommerce-react/frontend
+cd frontend
 ```
 * Install all necessary dependencies:
 ```
