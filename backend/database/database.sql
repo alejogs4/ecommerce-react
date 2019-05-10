@@ -1,12 +1,9 @@
 -------------------------------------------------
+-- Create database called 'vantablack'
+-------------------------------------------------
+-------------------------------------------------
 -- DDL - DATABASE DEFINITION
 -------------------------------------------------
-
-DROP DATABASE IF NOT EXISTS vantablack;
-
-CREATE DATABASE vantablack;
-
-USE vantablack;
 
 CREATE TABLE users (
   id serial,
