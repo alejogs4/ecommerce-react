@@ -120,5 +120,5 @@ function EditProduct({ match, history }) {
   )
 }
 
-export default withRouter(EditProduct)
+export default withAdminPermission(withRouter(EditProduct))
 // export default withRouter(EditProduct)
