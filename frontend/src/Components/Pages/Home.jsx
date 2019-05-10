@@ -58,9 +58,12 @@ class Home extends Component {
           <div className="hero-body">
             <div className="container">
               <Query query={PRODUCTS_QUERY}>
-                {({ data }) => (
-                  <ProductsGrid products={data.products} click={this.openModal} />
-                )}
+                {({ data, loading }) => {
+                  if (loading) return <p>Loading...</p>
+                  return (
+                    <ProductsGrid products={data.products} click={this.openModal} />
+                  )
+                }}
               </Query>
               <div className={`modal ${active && 'is-active'}`}>
                 <div className="modal-background"></div>
