@@ -45,7 +45,7 @@ const AdminUsers = () => (
             <h3 className="title has-text-white">Users Manager</h3>
             <p className="subtitle has-text-grey">Delete users as you like</p>
           </div>
-          <div className="container">
+          <div className="container is-fluid">
             <div className="notification">
               <Mutation mutation={BECOME_ADMIN}
                 refetchQueries={[{ query: GET_ALL_USERS }]}

@@ -24,6 +24,7 @@ export const PRODUCTS_QUERY_NAME = gql`
       name
       description
       price
+      image
     }
   }
 `
@@ -153,7 +154,7 @@ class AdminProducts extends Component {
                       </Mutation>
                     </div>
                   </div>
-                  <div className="container">
+                  <div className="container is-fluid">
                     <div className="notification">
                       {data.products && data.products.map(product => (
                         <ProductTableField key={product.id} item={product} />
