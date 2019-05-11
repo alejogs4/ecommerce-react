@@ -19,21 +19,21 @@ export const PRODUCTS_QUERY = gql`
 
 class Home extends Component {
   state = {
-    img: '',
+    product: {},
     active: false,
   }
 
-  openModal = (img) => {
+  openModal = (product) => {
     return () => {
       this.setState({
-        img,
+        product,
         active: true
       })
     }
   }
 
   render() {
-    const { img, active } = this.state
+    const { product, active } = this.state
 
     return (
       <main>
@@ -70,16 +70,16 @@ class Home extends Component {
                 <div className="modal-background" onClick={() => this.setState({ active: false })}></div>
                 <div className="modal-card">
                   <header className="modal-card-head">
-                    <p className="modal-card-title">Nombre</p>
-                    <span className="tag is-large">Precio</span>
+                    <p className="modal-card-title">{product.name}</p>
+                    <span className="tag is-large">{product.price}</span>
                   </header>
                   <section className="modal-card-body">
                     <p className="image is-4by3">
-                      <img src={img} alt="" />
+                      <img src={product.image} alt="" />
                     </p>
                   </section>
                   <footer className="modal-card-foot">
-                    <span className="tag is-large">Descripcion</span>
+                    <span className="tag is-large">{product.description}</span>
                     <button className="button is-success"><Link to='/shopping'>Comprar</Link></button>
                   </footer>
                 </div>
